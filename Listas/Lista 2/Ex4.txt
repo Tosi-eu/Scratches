@@ -1,0 +1,115 @@
+Parte 1:
+
++--------------------+             +-----------------+
+| OperaçãoMatemática |             |     Usuário     |
++--------------------+             +-----------------+
+| -operando1: float  |             | - nome: String  |
+| -operando2: float  |             | - idade: int    |
+| -tipo: String      |             | - cpf: String   |
+| -data: Data        |             +-----------------+
+| +realizarCalculo() |
++--------------------+
+           |
+           |
+           |
+           v
++------------------------+
+|        Resultado       |
++------------------------+
+| - usuario: Usuário     |
+| - tipoOperacao: String |
+| - dataOperacao: Data   |
+| - resultado: float     |
++------------------------+
+
+
+Parte 2:
+
+import java.util.Date;
+
+class Usuario {
+    private String nome;
+    private int idade;
+    private String cpf;
+
+    public Usuario(String nome, int idade, String cpf) {
+        this.nome = nome;
+        this.idade = idade;
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+}
+
+class OperacaoMatematica {
+    private float operando1;
+    private float operando2;
+    private String tipo;
+    private Date data;
+
+    public OperacaoMatematica(float operando1, float operando2, String tipo, Date data) {
+        this.operando1 = operando1;
+        this.operando2 = operando2;
+        this.tipo = tipo;
+        this.data = data;
+    }
+
+    public float realizarCalculo() {
+        switch (tipo) {
+            case "soma":
+                return operando1 + operando2;
+            case "subtracao":
+                return operando1 - operando2;
+            case "produto":
+                return operando1 * operando2;
+            case "coeficiente":
+                return operando1 / operando2;
+            default:
+                System.out.println("Operação inválida");
+                return 0;
+        }
+    }
+}
+
+class Resultado {
+    private Usuario usuario;
+    private String tipoOperacao;
+    private Date dataOperacao;
+    private float resultado;
+
+    public Resultado(Usuario usuario, String tipoOperacao, Date dataOperacao, float resultado) {
+        this.usuario = usuario;
+        this.tipoOperacao = tipoOperacao;
+        this.dataOperacao = dataOperacao;
+        this.resultado = resultado;
+    }
+
+    public void mostrarDados() {
+        System.out.println("Usuário: " + usuario.getNome());
+        System.out.println("Idade: " + usuario.getIdade());
+        System.out.println("CPF: " + usuario.getCpf());
+        System.out.println("Tipo da operação: " + tipoOperacao);
+        System.out.println("Data da operação: " + dataOperacao);
+        System.out.println("Resultado: " + resultado);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Usuario usuario = new Usuario("João", 30, "123.456.789-00");
+        OperacaoMatematica operacao = new OperacaoMatematica(10, 5, "soma", new Date());
+        float resultado = operacao.realizarCalculo();
+        Resultado res = new Resultado(usuario, "soma", new Date(), resultado);
+        res.mostrarDados();
+    }
+}

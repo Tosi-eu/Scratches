@@ -1,0 +1,86 @@
+abstract class DriverDispositivo {
+    protected boolean status;
+    
+    public DriverDispositivo() {
+        this.status = false;
+    }
+    
+    public void ligaDispositivo() {
+        this.status = true;
+    }
+    
+    public void verificaStatus() {
+        System.out.println("Status: " + this.status);
+    }
+    
+    public abstract void executaTeste();
+}
+
+class DriverRede extends DriverDispositivo {
+    private String enderecoIP;
+    
+    public DriverRede() {
+        super();
+        this.enderecoIP = "192.168.0.1";
+    }
+    
+    public void enviaPacoteDeDados(String dados) {
+        if (this.status) {
+            System.out.println("Enviando pacote de dados para " + this.enderecoIP + ": " + dados);
+        } else {
+            System.out.println("Dispositivo desligado. Não é possível enviar pacote de dados.");
+        }
+    }
+    
+    public void executaTeste() {
+        System.out.println("Testando driver de rede...");
+    }
+}
+
+class DriverImpressao extends DriverDispositivo {
+    private int nivelTinta;
+    
+    public DriverImpressao() {
+        super();
+        this.nivelTinta = 100;
+    }
+    
+    public void imprimePaginas(int numPaginas) {
+        if (this.status) {
+            if (this.nivelTinta >= numPaginas) {
+                System.out.println("Imprimindo " + numPaginas + " páginas...");
+                this.nivelTinta -= numPaginas;
+            } else {
+                System.out.println("Nível de tinta insuficiente. Não é possível imprimir as páginas.");
+            }
+        } else {
+            System.out.println("Dispositivo desligado. Não é possível imprimir páginas.");
+        }
+    }
+    
+    public void executaTeste() {
+        System.out.println("Testando driver de impressão...");
+    }
+}
+
+class DriverVideo extends DriverDispositivo {
+    private int brilho;
+    
+    public DriverVideo() {
+        super();
+        this.brilho = 50;
+    }
+    
+    public void alteraBrilhoDeExibicao(int novoBrilho) {
+        if (this.status) {
+            this.brilho = novoBrilho;
+            System.out.println("Brilho alterado para " + novoBrilho);
+        } else {
+            System.out.println("Dispositivo desligado. Não é possível alterar o brilho de exibição.");
+        }
+    }
+    
+    public void executaTeste() {
+        System.out.println("Testando driver de vídeo...");
+    }
+}

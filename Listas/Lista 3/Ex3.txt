@@ -1,0 +1,120 @@
+// Definindo a interface PegadaDeCarbono
+interface PegadaDeCarbono {
+  double getPegadaDeCarbono();
+}
+
+// Classe Prédio é agora abstrata e implementa a interface PegadaDeCarbono
+abstract class Predio implements PegadaDeCarbono {
+  protected double area;
+
+  public Predio(double area) {
+    this.area = area;
+  }
+
+  public double getArea() {
+    return area;
+  }
+}
+
+// Subclasses concretas de Prédio
+class Casa extends Predio {
+  public Casa(double area) {
+    super(area);
+  }
+
+  public double getPegadaDeCarbono() {
+    return getArea() * 0.5; // pegada de carbono média de uma casa
+  }
+}
+
+class Escola extends Predio {
+  private int numAlunos;
+
+  public Escola(double area, int numAlunos) {
+    super(area);
+    this.numAlunos = numAlunos;
+  }
+
+  public int getNumAlunos() {
+    return numAlunos;
+  }
+
+  public double getPegadaDeCarbono() {
+    return getArea() * 1.5 + getNumAlunos() * 0.1; // pegada de carbono média de uma escola
+  }
+}
+
+// Classe Carro implementa a interface PegadaDeCarbono
+class Carro implements PegadaDeCarbono {
+  private double kmPorLitro;
+  private double distanciaPercorrida;
+
+  public Carro(double kmPorLitro, double distanciaPercorrida) {
+    this.kmPorLitro = kmPorLitro;
+    this.distanciaPercorrida = distanciaPercorrida;
+  }
+
+  public double getKmPorLitro() {
+    return kmPorLitro;
+  }
+
+  public double getDistanciaPercorrida() {
+    return distanciaPercorrida;
+  }
+
+  public double getPegadaDeCarbono() {
+    return getDistanciaPercorrida() / getKmPorLitro() * 2.3; // pegada de carbono média de um carro
+  }
+}
+
+// Classe Bicicleta implementa a interface PegadaDeCarbono
+class Bicicleta implements PegadaDeCarbono {
+  public double getPegadaDeCarbono() {
+    return 0; // bicicleta não emite gases poluentes
+  }
+}
+
+// Classe Main para testar o código
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    // criando objetos
+    Casa minhaCasa = new Casa(150.0);
+    Escola minhaEscola = new Escola(500.0, 500);
+    Carro meuCarro = new Carro(10.0, 1000.0);
+    Bicicleta minhaBicicleta = new Bicicleta();
+
+    // criando lista e adicionando objetos
+    ArrayList<PegadaDeCarbono> lista = new ArrayList<>();
+    lista.add(minhaCasa);
+    lista.add(minhaEscola);
+    lista.add(meuCarro);
+    lista.add(minhaBicicleta);
+
+    // chamando o método getPegadaDeCarbono de cada objeto na lista
+    for (PegadaDeCarbono objeto : lista) {
+      System.out.println(objeto.getPegadaDeCarbono());
+    }
+
+    // instanciando diretamente objetos Casa e Escola
+    Casa casaDaPraia = new Casa(200.0);		
+Escola minhaFaculdade = new Escola(1000.0, 10000);
+
+// adicionando objetos diretamente na lista
+lista.add(casaDaPraia);
+lista.add(minhaFaculdade);
+
+// chamando o método getPegadaDeCarbono de cada objeto na lista novamente
+for (PegadaDeCarbono objeto : lista) {
+  System.out.println(objeto.getPegadaDeCarbono());
+}
+}
+}
+
+
+
+
+
+
+

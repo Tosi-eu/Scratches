@@ -1,0 +1,80 @@
+a)
+
+public interface Dispositivo {
+    void ligar();
+    void desligar();
+    int checarStatus();
+    void calibrar();
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Dispositivo> dispositivos = new ArrayList<>();
+        dispositivos.add(new Mouse());
+        dispositivos.add(new Teclado());
+        dispositivos.add(new Impressora());
+        dispositivos.add(new Video());
+
+        for (Dispositivo dispositivo : dispositivos) {
+            dispositivo.ligar();
+            dispositivo.calibrar();
+            dispositivo.desligar();
+            int status = dispositivo.checarStatus();
+            System.out.println("Status do dispositivo: " + status);
+        }
+    }
+}
+
+
+b)
+
+public interface Dispositivo {
+    void ligar();
+    void desligar();
+    int checarStatus();
+    void calibrar();
+}
+
+public abstract class ImpressoraAbstrata implements Dispositivo {
+    @Override
+    public void ligar() {
+        System.out.println("Ligando a impressora...");
+    }
+
+    @Override
+    public void desligar() {
+        System.out.println("Desligando a impressora...");
+    }
+
+    @Override
+    public int checarStatus() {
+        System.out.println("Checando o status da impressora...");
+        return 0;
+    }
+
+    @Override
+    public void calibrar() {
+        System.out.println("Calibrando a impressora...");
+    }
+
+    public abstract void imprimir();
+}
+
+public class Impressora extends ImpressoraAbstrata {
+    @Override
+    public void imprimir() {
+        System.out.println("Imprimindo...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Impressora impressora = new Impressora();
+        impressora.ligar();
+        impressora.calibrar();
+        impressora.imprimir();
+        impressora.desligar();
+        int status = impressora.checarStatus();
+        System.out.println("Status da impressora: " + status);
+    }
+}

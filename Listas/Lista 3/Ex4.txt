@@ -1,0 +1,225 @@
+a)
+
+public class Produto {
+    protected int codigo;
+    protected double precoUnitario;
+    protected String descricao;
+    protected int quantidadeEstoque;
+
+    public Produto(int codigo, double precoUnitario, String descricao, int quantidadeEstoque) {
+        this.codigo = codigo;
+        this.precoUnitario = precoUnitario;
+        this.descricao = descricao;
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public double getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setPrecoUnitario(double precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int retirarEstoque(int quantidade) {
+        int retirado;
+        if (quantidade > quantidadeEstoque) {
+            retirado = quantidadeEstoque;
+            quantidadeEstoque = 0;
+        } else {
+            retirado = quantidade;
+            quantidadeEstoque -= quantidade;
+        }
+        return retirado;
+    }
+
+    public void adicionarEstoque(int quantidade) {
+        quantidadeEstoque += quantidade;
+    }
+
+    public void imprimeDescricao() {
+        System.out.println("Produto " + codigo + ", " + descricao + ", custo de R$ " + precoUnitario + ", quantidade " + quantidadeEstoque);
+    }
+}
+
+b)
+
+import java.time.LocalDate;
+
+public class ProdutoPerecivel extends Produto {
+    private LocalDate dataValidade;
+
+    public ProdutoPerecivel(int codigo, double precoUnitario, String descricao, int quantidadeEstoque, LocalDate dataValidade) {
+        super(codigo, precoUnitario, descricao, quantidadeEstoque);
+        this.dataValidade = dataValidade;
+    }
+
+    public LocalDate getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(LocalDate dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+
+    @Override
+    public int retirarEstoque(int quantidade) {
+        if (quantidade <= quantidadeEstoque) {
+            quantidadeEstoque -= quantidade;
+            return quantidade;
+        } else {
+            quantidadeEstoque = 0;
+            return quantidadeEstoque;
+        }
+    }
+
+    public boolean adicionarEstoque(int quantidade) {
+        if (quantidadeEstoque == 0) {
+            quantidadeEstoque += quantidade;
+            return true;
+        } else {
+            LocalDate dataAtual = LocalDate.now();
+            LocalDate dataLimite = dataAtual.plusMonths(3);
+            if (dataLimite.isBefore(dataValidade)) {
+                return false;
+            } else {
+                quantidadeEstoque += quantidade;
+                return true;
+            }
+        }
+    }
+}
+
+c)
+
+public class ProdutoPerecivelEspecial extends ProdutoPerecivel {
+
+    public ProdutoPerecivelEspecial(int codigo, double preco, String descricao, int quantidade, LocalDate dataValidade) {
+        super(codigo, preco, descricao, quantidade, dataValidade);
+    }
+
+    public void imprimirNotaDeControle() {
+        System.out.println("Nota de controle - Produto perecível especial:");
+        System.out.println("Código: " + getCodigo());
+        System.out.println("Descrição: " + getDescricao());
+        System.out.println("Quantidade em estoque: " + getQuantidade());
+        System.out.println("Data de validade: " + getDataValidade());
+    }
+}
+
+d)
+
+public class ProdutoNaoPerecivel extends Produto {
+
+    private int tempoGarantia;
+
+    public ProdutoNaoPerecivel(int codigo, double preco, String descricao, int quantidade, int tempoGarantia) {
+        super(codigo, preco, descricao, quantidade);
+        this.tempoGarantia = tempoGarantia;
+    }
+
+    public int getTempoGarantia() {
+        return tempoGarantia;
+    }
+}
+
+e)
+
+import java.util.ArrayList;
+
+public class Estoque {
+
+    private ArrayList<Produto> produtos;
+
+    public Estoque() {
+        this.produtos = new ArrayList<Produto>();
+    }
+
+    public void cadastrarProduto(Produto produto) {
+        produtos.add(produto);
+    }
+
+    public Produto consultarProduto(int codigo) {
+        for (Produto produto : produtos) {
+            if (produto.getCodigo() == codigo) {
+                return produto;
+            }
+        }
+        return null;
+    }
+
+    public boolean retirarProduto(int codigo, int quantidade) {
+        Produto produto = consultarProduto(codigo);
+        if (produto != null && produto.getQuantidade() >= quantidade) {
+            produto.retirarDoEstoque(quantidade);
+            return true;
+        }
+        return false;
+    }
+
+    public double getCustoTotal() {
+        double custoTotal = 0;
+        for (Produto produto : produtos) {
+            custoTotal += produto.getCusto();
+        }
+        return custoTotal;
+    }
+
+    public void imprimirDescricao() {
+        for (Produto produto : produtos) {
+            System.out.println(produto.getDescricaoBasica());
+        }
+    }
+}
+
+f)
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        //Criando produtos
+        ProdutoPerecivel perecivel = new ProdutoPerecivel("001", 2.50, "Leite", 50, LocalDate.of(2023, 12, 31));
+        ProdutoPerecivelEspecial perecivelEspecial = new ProdutoPerecivelEspecial("002", 10.00, "Queijo", 20, LocalDate.of(2022, 11, 30));
+        ProdutoNaoPerecivel naoPerecivel = new ProdutoNaoPerecivel("003", 5.00, "Arroz", 100, 2);
+        
+        //Criando estoque
+        Estoque estoque = new Estoque();
+        
+        //Adicionando produtos ao estoque
+        estoque.adicionarProduto(perecivel);
+        estoque.adicionarProduto(perecivelEspecial);
+        estoque.adicionarProduto(naoPerecivel);
+        
+        //Buscando produto por código
+        Produto produtoBuscado = estoque.buscarProduto("002");
+        System.out.println("Produto buscado: " + produtoBuscado.getDescricao());
+        
+        //Imprimindo o custo total do estoque
+        System.out.println("Custo total do estoque: R$" + estoque.custoTotal());
+        
+        //Imprimindo descrição básica de todos os produtos
+        estoque.imprimirProdutos();
+    }
+
+}
+

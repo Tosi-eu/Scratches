@@ -1,0 +1,17 @@
+a)
+
+abstract class Executable {
+    protected int LOAD;
+    
+    public abstract boolean initialize();
+    public abstract int execute();
+    public abstract void close();
+}
+
+b)
+
+interface Executable {
+    boolean initialize();
+    int execute();
+    void close();
+}

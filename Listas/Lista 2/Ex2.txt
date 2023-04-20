@@ -1,0 +1,36 @@
++-------------------+              +----------------------+              +-----------------+
+|       Curso       |              |        Turma         |              |     Matrícula   |
++-------------------+              +----------------------+              +-----------------+
+| - nome            |              | - horário            |              | - aluno         |
+| - cargaHoraria    |              | - sala               |              | - turma         |
+| - valor           |              | - vagasDisponiveis   |              | - dataMatricula |
+| - descrição       |              | - númeroMatriculas   |              +-----------------+
+|                   | 1          * |                      | 1            |                 |
++-------------------+------------->+----------------------+<-------------------------------+
+| + getCargaHoraria |              | + getHorario         |              |+getDataMatricula|
+| + getValor        |              | + getSala            |              |+getAluno        |
+| + getDescricao    |              | + getVagasDisponiveis|              |+getTurma        |
++-------------------+              | + getNumeroMatriculas|              +-----------------+
+                                   |			    |	
+                                   |			    |
+                                   |  10 <= numMatriculas |
+                                   |			    |
+                                   |			    |
+                                   +----------------------+			    
+                                   |
+                                   |
+                                   v
+                           +------------------------+
+                           |         Aluno          |
+                           +------------------------+
+                           | - nome                 |
+                           | - cpf                  |
+                           | - endereco             |
+                           | - telefone             |
+                           |                        |
+                           +------------------------+
+                           | + getNome              |
+                           | + getCpf               |
+                           | + getEndereco          |
+                           | + getTelefone          |
+                           +------------------------+

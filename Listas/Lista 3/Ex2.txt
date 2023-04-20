@@ -1,0 +1,88 @@
+public class Produto {
+    private String nomeloja;
+    private double preco;
+
+    public Produto(String nomeloja, double preco) {
+        this.nomeloja = nomeloja;
+        this.preco = preco;
+    }
+
+    public String getNomeloja() {
+        return nomeloja;
+    }
+
+    public void setNomeloja(String nomeloja) {
+        this.nomeloja = nomeloja;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public String getDescricao() {
+        return "Produto de informática";
+    }
+}
+
+public class Mouse extends Produto {
+    private String tipo;
+
+    public Mouse(String nomeloja, double preco, String tipo) {
+        super(nomeloja, preco);
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String getDescricao() {
+        return super.getDescricao() + ", " + tipo;
+    }
+}
+
+public class Livro extends Produto {
+    private String autor;
+
+    public Livro(String nomeloja, double preco, String autor) {
+        super(nomeloja, preco);
+        this.autor = autor;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    @Override
+    public String getDescricao() {
+        return super.getDescricao() + ", " + autor;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Produto> produtos = new ArrayList<>();
+
+        produtos.add(new Mouse("Loja 1", 50.0, "Mouse óptico, Saída USB, 1.600 dpi"));
+        produtos.add(new Mouse("Loja 2", 40.0, "Mouse sem fio, Bluetooth, 1.200 dpi"));
+        produtos.add(new Livro("Loja 3", 30.0, "J.K. Rowling, Harry Potter e a Pedra Filosofal"));
+        produtos.add(new Livro("Loja 4", 20.0, "George Orwell, 1984"));
+
+        for (Produto produto : produtos) {
+            System.out.println(produto.getDescricao());
+        }
+    }
+}

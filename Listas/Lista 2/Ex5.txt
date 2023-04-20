@@ -1,0 +1,98 @@
+import java.util.ArrayList;
+
+public class Personagem {
+    private String nome;
+    private int idade;
+    private String cpf;
+    private int vida;
+    private ArrayList<Superpoder> superpoderes;
+
+    public Personagem(String nome, int idade, String cpf) {
+        this.nome = nome;
+        this.idade = idade;
+        this.cpf = cpf;
+        this.vida = 100; // vida inicial de 100
+        this.superpoderes = new ArrayList<Superpoder>();
+    }
+
+    // Métodos de acesso para os atributos
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public ArrayList<Superpoder> getSuperpoderes() {
+        return superpoderes;
+    }
+
+    // Adiciona um superpoder ao personagem
+    public void adicionarSuperpoder(Superpoder superpoder) {
+        this.superpoderes.add(superpoder);
+    }
+
+    // Remove um superpoder do personagem
+    public void removerSuperpoder(Superpoder superpoder) {
+        this.superpoderes.remove(superpoder);
+    }
+
+    // Ataca outro personagem com um determinado superpoder e intensidade de ataque
+    public void atacar(int intensidadeAtaque, String nomeSuperpoder, Personagem personagem) {
+        // Verifica se o personagem tem o superpoder necessário para o ataque
+        boolean possuiSuperpoder = false;
+        for (Superpoder superpoder : this.superpoderes) {
+            if (superpoder.getNome().equals(nomeSuperpoder)) {
+                possuiSuperpoder = true;
+                break;
+            }
+        }
+
+        // Se não tiver o superpoder, não pode atacar
+        if (!possuiSuperpoder) {
+            System.out.println(this.nome + " não possui o superpoder " + nomeSuperpoder + " necessário para atacar.");
+            return;
+        }
+
+        // Ataque com 50% de chance de acertar
+        if (Math.random() < 0.5) {
+            int vidaAtual = personagem.getVida();
+            int vidaNova = vidaAtual - intensidadeAtaque;
+            if (vidaNova < 0) {
+                vidaNova = 0;
+            }
+            personagem.setVida(vidaNova);
+            System.out.println(this.nome + " atacou " + personagem.getNome() + " com " + nomeSuperpoder + " e causou " + intensidadeAtaque + " de dano.");
+            System.out.println(personagem.getNome() + " agora tem " + personagem.getVida() + " de vida.");
+            if (personagem.getVida() == 0) {
+                System.out.println(personagem.getNome() + " morreu!");
+            }
+        } else {
+            System.out.println(this.nome + " atacou " + personagem.getNome() + " com " + nomeSuperpoder + " e errou.");
+        }
+   

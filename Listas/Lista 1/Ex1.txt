@@ -1,0 +1,12 @@
++-------------------+        +------------------+         +-----------------+         +------------------------+
+|      Celular      |        |    Processador   |         |    TelaTouch    |         |   SistemaComunicacao   |
++-------------------+        +------------------+         +-----------------+         +------------------------+
+| - processador     |        | - operacaoAtual  |         | - tamanhoTela   |         | - sinalConexao         |
+| - telaTouch       |        |                  |         | - corFundo      |         | - numeroContato        |
+| - sistemaSom      |        |                  |         |                 |         | - tipoConexao          |
+| - sistemaComunic. |        |                  |         |                 |         |                        |
++-------------------+        +------------------+         +-----------------+         +------------------------+
+|                   |        | + executarOp()   |         | + exibirMsg()   |         | + fazerLigacao()       |
+|                   |        | - processaDados()|         | - calibrarTela()|         | - estabelecerConexao() |
+|                   |        |                  |         |                 |         |                        |
++------------------+         +------------------+         +-----------------+         +------------------------+
