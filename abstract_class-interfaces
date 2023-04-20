@@ -2,13 +2,15 @@ Classes abstratas
 
 • As classes que utilizamos até agora são classes
 concretas: sua instanciação cria um objeto
+
 • Abstratas: classes que são modelos, mas que não se
 transformam em objetos concretos
 
 • Classes que definem comportamentos “genéricos:
-– Parcialmente, ou totalmente, implementada
-– Não podem ser instanciadas
-– Detalhes são definidos em subclasses especializadas
+
+	– Parcialmente, ou totalmente, implementada
+	– Não podem ser instanciadas
+	– Detalhes são definidos em subclasses especializadas
 
 Classe abstrata (ou virtual): classe que possui, pelo
 menos, um método abstrato
@@ -17,24 +19,30 @@ ter (ou satisfazer)
 – modelo (de requisitos) para classes descendentes
 
 Método abstrato:
-● Só pode ser declarado em uma classe abstrata
-● Não é implementado na classe onde é definido
-● Obrigatoriamente implementado em toda classe herdeira
-● Determina um padrão para as classes herdeiras
+	● Só pode ser declarado em uma classe abstrata
+	● Não é implementado na classe onde é definido
+	● Obrigatoriamente implementado em toda classe herdeira
+	● Determina um padrão para as classes herdeiras
+
 Um método abstrato obriga o programador a redefinir
 esse método em todas as subclasses.
 
 Classes abstratas Duas finalidades para abstract:
-1) O método na classe mãe não faz sentido, por exemplo:
-class Forma{
-public float calculaArea(){ return -1.0f; }
-}
-2) O programador poderia não implementar o método na
-classe herdeira, o que acarretaria problemas de funcionalidade.
+	1) O método na classe mãe não faz sentido, por exemplo:
+		class Forma{
+				public float calculaArea(){
+				 return -1.0f; }
+				}
+			}
+
+2) O programador poderia não implementar o método na classe herdeira, o que acarretaria problemas de funcionalidade.
+
 Solução:
-abstract class Forma{
-public abstract float calculaArea();
-}
+
+	abstract class Forma{
+				public abstract float calculaArea();
+			}
+
 Resultado:
 O programador é obrigado a redefinir o método calculaArea, do
 contrário, não poderá ter classes herdeiras utilizáveis.
@@ -58,10 +66,10 @@ devem necessariamente implementar
 classes que a usam
 
 Em Java: uma interface é uma classe abstrata pura
-• Só tem métodos abstratos (sem implementações)
- Todos os métodos são public e abstract
-• Sem atributos, a não ser constantes (public, static, e final)
-• Sem construtores
+	• Só tem métodos abstratos (sem implementações)
+	 Todos os métodos são public e abstract
+	• Sem atributos, a não ser constantes (public, static, e final)
+	• Sem construtores
 
 Exemplo
 ● Em um sistema de gerenciamento de empresas:
@@ -84,23 +92,26 @@ que deve ser quitada no final do mês
 “calcular o valor total de pagamento”
 
 ● Cabe a seguinte interface:
+
 interface Pagavel {
 double getValorPagamento();
 }
+
 ● Fazer com que ambas as classes implementem esta
 interface e, consequentemente, tenham que implementar o
 método getValorPagamento
 
 ● Polimorfismo resultante
-class Empregado implements Pagavel{
-...
-double getValorPagamento(){...código...}
-}
-class ContaAPagar implements Pagavel{
-...
-double getValorPagamento(){...outro código...}
+	class Empregado implements Pagavel{
+	...
+	double getValorPagamento(){...código...}
+	}
+	class ContaAPagar implements Pagavel{
+	...
+	double getValorPagamento(){...outro código...}
 
 ● Polimorfismo resultante
+
 Pagavel[] ps = new Pagavel[2];
 ps[0] = new Empregado();
 ps[1] = new ContaAPagar();
@@ -114,37 +125,27 @@ Interfaces -> POLIMORFISMO!
 - Ela deve implementar todos os métodos de cada interface
 - Se assemelha a herança múltipla
 
-Exemplo: classe Classificador com um método ordena(), que faz a
-ordenação de objetos de outras classes
--O método ordena() implementa um algoritmo que compara os
-elementos usando o método bool eMaiorQue()
--Toda classe que quiser ter ordenação de seus objetos deve
-implementar o método bool eMaiorQue()
- Esta funcionalidade existe em Java por meio do método
-Collection.sort() e da interface Comparable
+Exemplo: classe Classificador com um método ordena(), que faz a ordenação de objetos de outras classes
+
+-O método ordena() implementa um algoritmo que compara os elementos usando o método bool eMaiorQue()
+
+-Toda classe que quiser ter ordenação de seus objetos deve implementar o método bool eMaiorQue()
+
+ Esta funcionalidade existe em Java por meio do método Collection.sort() e da interface Comparable
 
 Vantagens:
-Deixa código mais reutilizável
-Provê ocultamento da informação
-Provê interface comum que classes devem implementar
-Cuidado:
-Não é possível acrescentar métodos a uma interface já
-em uso, as classes que a implementam não compilarão
-mais.
+	- Deixa código mais reutilizável
+	- Provê ocultamento da informação
+	- Provê interface comum que classes devem implementar
+	- *Cuidado*: Não é possível acrescentar métodos a uma interface já
+			em uso, as classes que a implementam não compilarão mais.
 
 Diferença entre classes abstratas e interfaces
-Classe abstrata Interface
-Pode implementar métodos Não implementa nenhum
-método (a não ser default e
-static)
-Classe pode ser subclasse de
-apenas uma classe abstrata
-Uma classe pode implementar
-múltiplas interfaces
-Define hierarquia que possui
-relação (“é-um”)
-Não define uma hierarquia
-(subclasses sem relação)
+Classe abstrata 							Interface
+Pode implementar métodos 					Não implementa nenhum método (a não ser default estatic)
+Define hierarquia que possui relação (“é-um”)		Não define uma hierarquia(subclasses sem relação)
+Classe pode ser subclasse de apenas uma classe abstrata
+Uma classe pode implementar múltiplas interfaces
 
  A partir do Java 8, além dos métodos abstratos, dois outros
 tipos:

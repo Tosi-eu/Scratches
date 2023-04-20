@@ -1,14 +1,7 @@
 Programação não estruturada
 (desvios de fluxo arbitrários)
-x
-Programação Estruturada
 
-Programação Procedimental
-x
-Programação Orientada a Objetos
-
-Antes da programação estruturada, programação feita
-com desvios incondicionais no fluxo de execução
+Antes da programação estruturada, a programação era feita com desvios incondicionais no fluxo de execução
 
 ● Essa abordagem tornava muito difícil a manutenção
 do programa
@@ -19,187 +12,131 @@ desvios incondicionais
 O uso indiscriminado de transferência de controle era
 considerado a raiz de muitos problemas
 
-● Ainda é possível usar o comando GOTO (mas não
-façam isso)
 ● Os comandos de um programa são executados
 sequencialmente
-● Linguagens de programação permitem que essa
-sequência seja quebrada, causando o que é chamado
-de transferência de controle (controle de fluxo)
-● Porém, de forma organizada: if, case, for, while, dowhile, try/catch, on<event>
 
-● Programação Estruturada
-● Blocos elementares de código baseados em três
-mecanismos básicos:
-□ Sequência
-□ Seleção
-□ Repetição
+● Linguagens de programação permitem que essa sequência seja quebrada, causando o que é chamado de transferência de controle (controle de fluxo), porém de forma organizada, com if, case, for, while, dowhile, try/catch, on<event>
+
+● Programação Estruturada:
+	Estrutura Básica:
+		□ Sequência
+		□ Seleção
+		□ Repetição
+
 ● Estes blocos têm um ponto de início (o topo do bloco) e
 um ponto de término (o fim do bloco) de execução
 
 Sequência
-□ Implementa os passos
-de processamento
-para descrever
-qualquer programa.
+	□ Implementa os passos de processamento para descrever qualquer programa.
 
 Seleção
-□ Especifica a possibilidade
-de selecionar o fluxo de
-execução do processamento
-baseado em ocorrências
-lógicas.
-□ IF e SWITCH
+□ Especifica a possibilidade de selecionar o fluxo de execução do processamento
+baseado em ocorrências lógicas.
 
 Repetição (iteração)
-□ Permite a execução
-repetitiva de segmentos
-do programa.
-□ FOR e WHILE
+□ Permite a execução repetitiva de segmentos do programa(FOR e WHILE)
 
 De fato, estes três mecanismos emergem do fato de
 que a computação se baseia em:
-1. Sequência
-2. Controle de fluxo
-3. Movimentação de dados (cópia/atribuição)
-4. Operações aritméticas e lógicas
- Como a Máquina de Turing se relaciona com isso?
+	1. Sequência
+	2. Controle de fluxo
+	3. Movimentação de dados (cópia/atribuição)
+	4. Operações aritméticas e lógicas
+	 Como a Máquina de Turing se relaciona com isso? Estados finitos
 
-A experiência mostra que a melhor forma de se
-desenvolver programas de grande porte é dividí-los
-em pequenas partes
-● Dividir para conquistar
-● Essas partes são denominadas funções ou
-procedimentos
+A melhor forma de se desenvolver programas de grande porte é dividí-los em pequenas partes, pois:
 
-A chamada de procedimento é utilizada para invocar o
-procedimento.
-● Transferência de controle
-● Contador de programa
-● Após a execução do procedimento, o fluxo de controle retorna
-para o ponto imediatamente após a chamada
+	● Garante maior legibilidade e facilidade de execução (dividir e conquistar)
+	● Dividir -> criar funções e procedimentos
 
-Procedimentos se combinam para prover a
-funcionalidade desejada
-● Programa: uma sequência de chamadas de
-procedimento. Programa principal passa os dados
-para as chamadas individuais para serem processados
+A chamada de procedimento é utilizada para invocar o procedimento.
 
-Softwares cada vez mais complexos
-● Busca por meios para tornar a tarefa de programação
-mais produtiva
-● Ainda não existe uma resposta definitiva, mas sabe-se
-que POO produz resultados competitivos em
-diversas situações
+	● Transferência de controle
+	● Contador de programa
+	● Após a execução do procedimento, o fluxo de controle retorna para o ponto imediatamente após a chamada
 
-POO: conjuntos de objetos interagentes, cada
-qual responsável por seu estado interno
-● Os objetos interagem uns com os outros
-● Cada objeto é responsável
-pela inicialização e destruição
-de seus dados internos
+Procedimentos se combinam para prover a funcionalidade desejada:
 
-Na programação estruturada
-● Procedimentos: blocos cuja comunicação se dá pela
-passagem de dados
-● Programa estruturado: caracterizado pelo acionamento
-de procedimentos cuja tarefa é a manipulação de dados
-● Na programação orientada a objetos
-● Dados e procedimentos são encapsulados em
-elementos denominados objetos
-● A comunicação entre objetos caracteriza a execução
-do programa
-18
+● Programa: uma sequência de chamadas de procedimento. Programa principal passa os dados para as chamadas individuais para serem processados
 
-● Vantagens da PO:
-● Maior reaproveitamento de código
-● Maior facilidade de manutenção
-● Menor código gerado
-● Maior confiabilidade no código
-● Maior facilidade de gerenciamento do código (reduz
-grandes problemas para problemas menores).
+Softwares cada vez mais complexos:
+	● Busca por meios para tornar a tarefa de programação mais produtiva
+	● Ainda não existe uma resposta definitiva, mas sabe-se que POO produz resultados competitivos em
+	   diversas situações
 
-Programação orientada a objetos é focada na
-definição de coisas ou objetos
-● Substantivos
-● Verbos
-● Mais próximo da percepção que se tem do mundo real
+POO: conjuntos de objetos interagentes, cada qual responsável por seu estado interno, onde:
+	● Os objetos interagem uns com os outros
+	● Cada objeto é responsável pela inicialização e destruição de seus dados internos
 
-Objeto: formaliza o modo pelo qual compreendemos
-algo no domínio do problema
-● Capacidade do sistema para guardar informações sobre
-o elemento abstraído e interagir com ele
-● Entidade o mais próximo possível das entidades do
-mundo real - aquilo que é tangível ou visível
-● Os objetos são uma maneira de diminuir o gap
-semântico
-□ Diferença entre o domínio do problema e o modelo que
-implementa a solução
+Na programação estruturada:
+	● Procedimentos: blocos cuja comunicação se dá pela passagem de dados
+	● Programa estruturado: caracterizado pelo acionamento de procedimentos cuja tarefa é a manipulação de 	dados
+	● Na programação orientada a objetos
+	● Dados e procedimentos são encapsulados em elementos denominados objetos
+	● A comunicação entre objetos caracteriza a execução do programa
 
-● A um objeto sempre estarão associados
-● Estado
-□ Propriedades (atributos) que ele possui e valores que elas
-estão assumindo
-● Comportamento
-□ Forma como ele age e reage, em termos de mudança de
-seu estado e o relacionamento com os demais objetos
-● Identidade
-□ Propriedade pela qual ele se distingue dos demais objetos
-□ Cada objeto é único
+Vantagens da PO:
 
-● Exemplos de objetos no mundo real
-● Cachorro, mesa, televisão, bicicleta, lâmpada, ...
-● Lâmpada
-□ Atributos: ligada, desligada
-□ Métodos: ligar, desligar
-● Rádio
-□ Atributos: ligado, desligado, volume, estação, ...
-□ Métodos: ligar, desligar, aumentar/abaixar volume,
-sintonizar,...
+	● Maior reaproveitamento de código
+	● Maior facilidade de manutenção
+	● Menor código gerado
+	● Maior confiabilidade no código
+	● Maior facilidade de gerenciamento do código (reduz grandes problemas para problemas menores).
 
-● Uma classe define um conjunto de objetos semelhantes
-● Atributos e métodos que resumem as características
-comuns de vários objetos
-● Diferença entre classe e objeto
-● Objeto constitui uma entidade concreta com tempo e
-espaço de existência
-● Classe é apenas uma abstração
-● Em termos de programação, definir uma classe signica
-formalizar um tipo abstrato de dado (TAD) e todas as
-operações associadas a esse tipo, enquanto declarar
-objetos signica criar variáveis do tipo definido
+Programação orientada a objetos é focada na definição de coisas ou objetos
+	● Substantivos
+	● Verbos
+	● Mais próximo da percepção que se tem do mundo real
 
-● Classe é um template (“forma”) para a criação de objetos
-● Especifica os tipos de dados (atributos) e operações
-(métodos) suportadas por um conjunto de objetos
-● Um objeto é uma instância de uma classe
-● Criação de um objeto a partir de uma classe é chamada de
-instanciação
-● É muito comum que em um programa existam várias
-instâncias de uma mesma classe
-□ O que diferencia cada uma?
+Objeto: formaliza o modo pelo qual compreendemos algo no domínio do problema
 
-● Cada instância é formada por valores de atributos
-únicos e um comportamento comum
-● O estado de cada instância é representado pelos valores
-de seus atributos
-● Diferentes objetos de uma mesma classe não
-compartilham os mesmos valores de atributos, cada um
-possui sua própria cópia
-□ A menos que isso seja desejado e explicitamente declarado
-□ Neste caso, um único atributo pode ser compartilhado para
-todas as instâncias
+	● Capacidade do sistema para guardar informações sobre o elemento abstraído e interagir com ele
+	● Entidade o mais próximo possível das entidades do mundo real - aquilo que é tangível ou visível
+	● Os objetos são uma maneira de diminuir o gap semântico
 
-● Métodos: operações executadas pelos objetos
-● Valores dos atributos são (normalmente) acessados
-através dos métodos definidos pela classe
-□ Information-hiding
-● O serviço oferecido pelos métodos é um comportamento
-específico, residente no objeto, que define como ele deve
-agir quando acionado
+□ Diferença entre o domínio do problema e o modelo que implementa a solução
 
-● Notação gráfica: permite visualizar uma abstração
-independente de linguagem específica, dando ênfase
-às partes importantes: nome, atributos e métodos
+	● A um objeto sempre estarão associados
+	● Estado
+
+	□ Propriedades (atributos) que ele possui e valores que elas estão assumindo
+	● Comportamento(Forma como ele age e reage, em termos de mudança de seu estado e o relacionamento com os 	     demais objetos)
+	● Identidade(Propriedade pela qual ele se distingue dos demais objetos; Cada objeto é único)
+
+	● Exemplos de objetos no mundo real:
+		● Cachorro, mesa, televisão, bicicleta, lâmpada, ...
+		● Lâmpada
+			□ Atributos: ligada, desligada
+			□ Métodos: ligar, desligar
+		● Rádio
+			□ Atributos: ligado, desligado, volume, estação, ...
+			□ Métodos: ligar, desligar, aumentar/abaixar volume, sintonizar,...
+
+	● Uma classe define um conjunto de objetos semelhantes
+	● Atributos e métodos que resumem as características comuns de vários objetos
+	● Diferença entre classe e objeto
+		● Objeto constitui uma entidade concreta com tempo e espaço de existência
+		● Classe é apenas uma abstração
+		● Em termos de programação, definir uma classe signica formalizar um tipo abstrato de dado (TAD) e 			   todas as operações associadas a esse tipo, enquanto declarar objetos signica criar variáveis do            	         tipo definido
+		● Classe é um template (“forma”) para a criação de objetos
+		● Classe especifica os tipos de dados (atributos) e operações suportadas por um conjunto de objetos
+		● Um objeto é uma instância de uma classe
+		● Criação de um objeto a partir de uma classe é chamada de instanciação
+		● É muito comum que em um programa existam várias instâncias de uma mesma classe
+
+
+		● Cada instância é formada por valores de atributos únicos e um comportamento comum
+		● O estado de cada instância é representado pelos valores de seus atributos
+		● Diferentes objetos de uma mesma classe não compartilham os mesmos valores de atributos, cada um
+		  possui sua própria cópia:
+				□ A menos que isso seja desejado e explicitamente declarado
+				□ Neste caso, um único atributo pode ser compartilhado para todas as instâncias
+
+		● Métodos: operações executadas pelos objetos
+		● Valores dos atributos são (normalmente) acessados através dos métodos definidos pela classe
+		□ Information-hiding
+		● O serviço oferecido pelos métodos é um comportamento específico, residente no objeto, que define 			como ele deve agir quando acionado
+
+		● Notação gráfica: permite visualizar uma abstração independente de linguagem específica, dando 			ênfase às partes importantes: nome, atributos e métodos
 
 

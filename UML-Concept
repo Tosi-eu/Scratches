@@ -1,38 +1,30 @@
-UML, (Linguagem de Modelagem Unificada), uma
-linguagem visual utilizada nas etapas de análise e
-projeto de sistemas
-A UML se tornou a linguagem padrão de projeto de
-software, adotada internacionalmente pela indústria de
-Engenharia de Software
+UML, (Linguagem de Modelagem Unificada), uma linguagem visual utilizada nas etapas de análise e
+ projeto de sistemas
+
+A UML se tornou a linguagem padrão de projeto de software, adotada internacionalmente pela indústria de
+ Engenharia de Software
 
 UML não é uma linguagem de programação!
-É uma linguagem de modelagem utilizada para
-representar o sistema de software sob os seguintes
-parâmetros:
-Requisitos
-Comportamento
-Estrutura lógica
-Dinâmica de processos
-Comunicação/Interface com os usuários
+
+É uma linguagem de modelagem utilizada para representar o sistema de software sob os seguintes parâmetros:
+	Requisitos
+	Comportamento
+	Estrutura lógica
+	Dinâmica de processos
+	Comunicação/Interface com os usuários
 
 Por que modelar um sistema?
-• Sistemas são complexos; é necessário decompô-los em pedaços
-compreensíveis abstraindo-se aspectos essenciais;
-• Diagramas auxiliam no entendimento do problema;
-• Linguagem comum que permite aos desenvolvedores entender quais
-objetos fazem parte do sistema e como se comunicam;
-• O modelo induz ao projeto: previsão das necessidades, problemas, e
-limitações.
+	• Sistemas são complexos; é necessário decompô-los em pedaços compreensíveis abstraindo-se aspectos 		essenciais;
+	• Diagramas auxiliam no entendimento do problema;
+	• Linguagem comum que permite aos desenvolvedores entender quais objetos fazem parte do sistema e como se 	 	comunicam;
+	• O modelo induz ao projeto: previsão das necessidades, problemas, e
+	limitações.
 
 Surgiu da união de outras linguagens de modelagem:
- O método de Booch (Grady Booch da Rational Software
-Corporation)
- O método OMT (Object Modeling Technique), de Ivar Jacobson, da
-Objectory
- Método OOSE (Object–Oriented Sofware Engineering), de James
-Rumbaugh, da General Eletrics
-Até a década de 90, estes eram as linguagens de
-modelagem mais populares
+	 O método de Booch (Grady Booch da Rational Software Corporation)
+	 O método OMT (Object Modeling Technique), de Ivar Jacobson, da Objectory
+	 Método OOSE (Object–Oriented Sofware Engineering), de James Rumbaugh, da General Eletrics
+	Até a década de 90, estes eram as linguagens de modelagem mais populares
 
 Objetivo da UML
 
@@ -64,13 +56,13 @@ relacionamentos
 • Estrutura lógica
 – Classes, associações, interfaces
 
-Uma classe possui a notação de um
-retângulo dividido em três partes:
+Uma classe possui a notação de um retângulo dividido em três partes:
 1. Nome da Classe;
 2. Atributos da Classe;
 3. Métodos da Classe;
 
 Forma completa de um atributo:
+
 visibilidade nome : tipo = valor_inicial {propriedades}
 – Visibilidade: public (+), private (-), protected (#)
 – Tipo do atributo: ex: int, float, double, String, Date, …
@@ -94,17 +86,16 @@ Relacionamentos entre Classes
 
 ● Como diferentes classes se relacionam?
 ● Identificar as maneiras de conexão entre classes
-● Representar estes relacionamentos no diagrama de
-classes
-● Relações fornecem um caminho para a comunicação
-entre as classes (para seus respectivos objetos)
+● Representar estes relacionamentos no diagrama de classes
+● Relações fornecem um caminho para a comunicação entre as classes (para seus respectivos objetos)
 
 Relacionamentos
+
 Tipos:
-1) Generalização - “é um”
-2) Associação – “usa”
-3) Agregação – “é parte de” (possui)
-4) Composição - “é parte essencial de” (é dono de)
+	1) Generalização - “é um”
+	2) Associação – “usa”
+	3) Agregação – “é parte de” (possui)
+	4) Composição - “é parte essencial de” (é dono de)
 
 Generalização
 
@@ -113,36 +104,28 @@ Relacionamentos entre classes do tipo “é um”
 –Também chamado de herança
 –Ex: Um cachorro é um mamífero
 ● Abstração de Generalização/Especialização
-–A partir de duas ou mais classes, abstrai-se uma classe mais
-genérica;
+–A partir de duas ou mais classes, abstrai-se uma classe mais genérica;
 –Ou de uma classe geral, deriva-se outra mais específica
-–Sub-classes possuem todas as propriedades das classes as
-quais elas especializam
-–Pelo menos uma propriedade/método distingue duas classes
-especializadas
+–Sub-classes possuem todas as propriedades das classes as quais elas especializam
+–Pelo menos uma propriedade/método distingue duas classes especializadas
 
 No diagrama de classes:
-–A generalização é representada com uma seta do lado
-da classe mais geral (classe base)
+–A generalização é representada com uma seta do lado da classe mais geral (classe base)
 
 Organiza as classes hierarquicamente
 ● Técnica de reutilização de software
-– Novas classes a partir de classes existentes,
-absorvendo seus atributos e comportamentos, e
-recebendo novos recursos
+– Novas classes a partir de classes existentes, absorvendo seus atributos e comportamentos, e recebendo novos recursos
 
-Associação Simples, Composição, e
-Agregação
+Associação Simples, Composição, e Agregação
 
 Relacionamentos
+
 Relacionamentos são caracterizados por:
 ● nome: descrição, usualmente um verbo (faz, tem, possui,...)
 ● navegabilidade: indicada por uma seta
-• Uni (uma flecha) ou bidirecional (sem
-flechas/duas flechas)
+	• Uni (uma flecha) ou bidirecional (sem flechas/duas flechas)
 ● multiplicidade: 0..1, 0..*, 1, 1..*, 2, 3..7
-● tipos de relacionamentos com multiplicidade: associação,
-agregação, e composição
+● tipos de relacionamentos com multiplicidade: associação, agregação, e composição
 
 Nomeando Relacionamentos
 • Para facilitar, um relacionamento pode ser nomeado
@@ -150,8 +133,7 @@ Nomeando Relacionamentos
 • Usualmente um verbo ou uma frase verbal
 
 Navegabilidade
-Navegabilidade indica se uma classe, ou se ambas as classes
-se relacionam:
+Navegabilidade indica se uma classe, ou se ambas as classes se relacionam:
 
 Se A tem seta pra B, A se relaciona ccom B e B n sabe da existência de A. O contrário também é válido, assim como também é possível de haver relacionamentos mútuo, ou seja, setas para os dois
 
@@ -173,12 +155,10 @@ Associação simples (“usa um”)
 – As classes são independentes
 – São representadas como linhas conectando às classes participantes
 – Podem ter um nome identificando a associação
-– Seta indicando que a associação somente pode ser utilizada em uma
-única direção (o mais usual e adequado)
+– Seta indicando que a associação somente pode ser utilizada em uma única direção (o mais usual e adequado)
 - Representa relacionamentos “usa um”
 -Ex.: uma pessoa “usa uma” calculadora
--Na implementação: um objeto A usa outro objeto B
-chamando um método público de B
+-Na implementação: um objeto A usa outro objeto B chamando um método público de B
 
 A associação simples também é chamada de
 dependência.
@@ -199,10 +179,8 @@ Leitura bidirecional:
 
 Agregação e Composição
 ● No diagrama de classes:
-–Composição: associação representada com um losango
-sólido do lado todo
-–Agregação: associação representada com um losango
-sem preenchimento do lado todo
+–Composição: associação representada com um losango sólido do lado todo
+–Agregação: associação representada com um losango sem preenchimento do lado todo
 
 Classe todo
 - Classe resultante da agregação ou composição
@@ -236,21 +214,14 @@ objeto parte
 • Um objeto pode ser parte componente de vários outros
 objetos
 
-Tanto agregação como composição implicam na presença
-de um atributo do tipo Parte na classe Todo.
+Tanto agregação como composição implicam na presença de um atributo do tipo Parte na classe Todo.
 A composição indica que quando uma instância da classe
 Todo deixar de existir, então as correspondentes
 instâncias Parte também deverão deixar de existir.
- Exemplo icônico: um carro é composto por rodas,
-motor, direção, suspensão, etc; e é agregado por um
-motorista. A existência do carro não depende da
-existência do motorista, já um carro sem motor não
-existe
+ Exemplo icônico: um carro é composto por rodas, motor, direção, suspensão, etc; e é agregado por um motorista.				  A existência do carro não depende da existência do motorista, já um carro sem motor não existe
 
-Não faz sentido que Folha, Raiz, ou Tronco existam sem que sejam
-atributos de uma árvore (neste modelo em particular).
-Segundo o diagrama, não pode haver uma árvore sem Folha, Raiz, ou
-Tronco, pois a cardinalidade mínima é 1.
+Não faz sentido que Folha, Raiz, ou Tronco existam sem que sejam atributos de uma árvore (neste modelo em particular).
+Segundo o diagrama, não pode haver uma árvore sem Folha, Raiz, ou Tronco, pois a cardinalidade mínima é 1.
 
 Composição: exemplo
 
@@ -270,10 +241,10 @@ ArrayList<Dedo> dedos;
 
 Agregação: exemplo
 
-Rede de
-Computadores
+Rede de Computadores
 Computador
 0..*
+
 Um computador existe
 Independentemente de uma rede
 Um computador pode estar ligado a mais
@@ -281,23 +252,19 @@ de uma rede ao mesmo tempo
 Uma Rede pode ter nenhum computador.
 
 Um livro existe independente de um empréstimo.
-Mas Empréstimo precisa ter, obrigatoriamente, um
-livro.
+Mas Empréstimo precisa ter, obrigatoriamente, um livro.
 
 Pessoa
 (seta apontada para pessoa)
-Endereço
-de contato
+Endereço de contato
 
-Se a pessoa é eliminada do sistema, não faz sentido
-manter o endereço de contato.
-Mas não se pode ter uma pessoa sem endereço de
-contato pois a cardinalidade exata é 1.
+Se a pessoa é eliminada do sistema, não faz sentido manter o endereço de contato.
+Mas não se pode ter uma pessoa sem endereço de contato pois a cardinalidade exata é 1.
 
 Relacionamentos: qual usar?
 Como saber qual relacionamento deve ser utilizado?
-•Existem atributos ou métodos sendo aproveitados por
-outras classes? A subclasse “é do tipo” da superclasse?
+
+•Existem atributos ou métodos sendo aproveitados por outras classes? A subclasse “é do tipo” da superclasse?
 •Sim: Isso é herança
 •Não: Existe todo-parte?
 •Não: Isso é associação
@@ -305,8 +272,7 @@ outras classes? A subclasse “é do tipo” da superclasse?
 –Sim: Isso é agregação
 –Não: Isso é uma composição
 
-Embora seja um padrão, o UML varia (bastante) entre
-diferentes fabricantes de software
+Embora seja um padrão, o UML varia (bastante) entre diferentes fabricantes de software
 ● Cada ferramenta contém especificidades e variações
 ● Foram vistos apenas os principais relacionamentos
 entre classes, o padrão prevê outros
@@ -314,8 +280,7 @@ entre classes, o padrão prevê outros
 (entre classe abstrata e suas derivações) e de
 Implementação (entre interfaces e classes)
 
-Todo diagrama UML tem um correspondente código, mas
-o contrário nem sempre é verdadeiro;
+Todo diagrama UML tem um correspondente código, mas o contrário nem sempre é verdadeiro;
 ● Uma linguagem de programação tem muito mais
 possibilidades do que o UML, o qual é uma linguagem de
 projeto;

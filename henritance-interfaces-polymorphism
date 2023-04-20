@@ -1,19 +1,14 @@
 Herança
-Por meio da Genética, é possível herdarmos
-características de nossos pais
-Herdamos atributos e comportamentos de
-nossos pais
-Em OO, classes também podem herdar características (atributos e
-comportamentos) de outra classe
+	Por meio da Genética, é possível herdarmos características de nossos pais
+	Herdamos atributos e comportamentos de nossos pais
+	Em OO, classes também podem herdar características (atributos e comportamentos) de outra classe
 
-Criação de classes com base em uma classe já
-existente
+Criação de classes com base em uma classe já existente
+
 Objetivo: reuso de software e codificações versáteis
-Capacidade de reusar código pela especialização de
-soluções genéricas
+Capacidade de reusar código pela especialização de soluções genéricas
 – A ideia é “ampliar” a funcionalidade de uma classe
-Todo objeto da subclasse também é um objeto da
-superclasse, mas NÃO vice-versa
+Todo objeto da subclasse também é um objeto da superclasse, mas NÃO vice-versa
 
 Herança representa um relacionamento de generalização entre
 classes:
@@ -71,7 +66,7 @@ protected #       OK                OK                        OK                
 <ausente>(padrão) OK                OK                        OK                       Não                            Não
 private -         OK                Não                       Não                      Não                            Não
 
-public + 
+public + Pode tudo
 protected # Pode tudo no mesmo pacote, e em subclasses em qualquer lugar
 <ausente>(padrão) - Pode tudo no mesmo package
 private - Não pode nada
@@ -113,12 +108,9 @@ argumentos, mas comportamento diferente
 diferente
 
 ● Casos nos quais a sobrescrita é indicada:
-1) A classe mãe (abstrata) não oferece implementação para
-o método, somente a declaração
-2) A implementação do método na classe mãe não é
-adequada na classe filha
-3) A classe filha pretende estender as funcionalidades da
-classe mãe
+	1) A classe mãe (abstrata) não oferece implementação para o método, somente a declaração
+	2) A implementação do método na classe mãe não é adequada na classe filha
+3) A classe filha pretende estender as funcionalidades da classe mãe
 
 ● Regra:
 – O método da subclasse deve ser declarado exatamente com
@@ -130,76 +122,57 @@ subclasse não pode ser menos acessível
 Exemplo:
  Considere as seguintes classes
 public class ObjetoGeo {
-...
+
 public void desenha(Graphics g);
 }
 public class Retangulo extends ObjetoGeo {
-...
+
 public void desenha (Graphics g) {
 g.drawRect (x, y, lado, lado2);
 }
 }
 public class Circulo extends ObjetoGeo {
-...
+
 public void desenha (Graphics g) {
 g.drawCircle (x, y, raio);
 }
 }
-A classe mãe
-especifica um
-método
-desenha
-Cada classe filha
-fornece uma
-implementação
-diferente para a
-mesma
-especificação do
-método desenha
+A classe mãe especifica um método desenha. Cada classe filha fornece uma implementação diferente para a
+ mesma especificação do método desenha
+
 Polimorfismo - sobrescrita
+
 ● Exemplo IMPORTANTE: polimorfismo em uso
-...
+
 for (int i = 0; i < desenhos.size(); i++) {
 ObjetoGeo x = desenhos[i];
 x.desenha(g);
 }
-...
-Será decidido automaticamente qual implementação
-invocar, dependendo do objeto:
+
+Será decidido automaticamente qual implementação invocar, dependendo do objeto:
 “ligação dinâmica” (“dinamic binding” )
 
 Exemplo IMPORTANTE: polimorfismo em uso
-...
+
 for (int i = 0; i < desenhos.size(); i++) {
 ObjetoGeo x = desenhos[i];
 x.desenha(g);
 }
-...
-Será decidido automaticamente qual implementação
-invocar, dependendo do objeto:
-“ligação dinâmica” (“dinamic binding” )
 
 Classes abstratas
 
-• Em determinadas circunstâncias é necessário criar classes
-que sejam modelos, mas que não se transformem em
-objetos concretos
-• Os tipos de classes que utilizamos até agora são definidas como
-classes concretas: sua instanciação cria um objeto
+• Em determinadas circunstâncias é necessário criar classes que sejam modelos, mas que não se transformem em
+ objetos concretos
+• Os tipos de classes que utilizamos até agora são definidas como classes concretas: sua instanciação cria um   objeto
 
-• Pode-se implementar classes que definem
-comportamentos “genéricos” ou abstratos:
-– A essência da superclasse é definida e pode ser parcialmente, ou
-totalmente, implementada
-– Não podem ser instanciadas
-– Detalhes são definidos em subclasses especializadas
+• Pode-se implementar classes que definem comportamentos “genéricos” ou abstratos:
+	– A essência da superclasse é definida e pode ser parcialmente, ou totalmente, implementada
+	– Não podem ser instanciadas
+	– Detalhes são definidos em subclasses especializadas
 
-Classe abstrata (ou virtual): classe da qual nunca são
-criadas instâncias (objetos)
-– existe para reunir características comuns que seus
-descendentes devem ter (ou satisfazer)
-– serve como modelo (de requisitos) para criação de classes
-descendentes
+Classe abstrata (ou virtual): classe da qual nunca são criadas instâncias (objetos)
+	– existe para reunir características comuns que seus descendentes devem ter (ou satisfazer)
+	– serve como modelo (de requisitos) para criação de classes descendentes
 
 ● Método abstrato:
 ● Método que só pode ser definido em uma classe abstrata
@@ -276,7 +249,7 @@ uma despesa que deve ser quitada no final do mês
 
 ● Cabe a seguinte interface:
 interface Pagavel {
-double getValorPagamento();
+	double getValorPagamento();
 }
 ● E fazer com que ambas as classes implementem esta
 interface e, consequentemente, tenham que implementar o
@@ -288,38 +261,26 @@ método getValorPagamento
 - Se assemelha a herança múltipla
 
 Vantagens:
-Deixa código mais reutilizável
-Provê ocultamento da informação
-Provê interface comum que classes devem implementar
-Cuidado:
-Não é possível acrescentar métodos a uma interface já
-em uso, as classes que a implementam não compilarão
-mais.
+	Deixa código mais reutilizável
+	Provê ocultamento da informação
+	Provê interface comum que classes devem implementar
+	Cuidado:
+		Não é possível acrescentar métodos a uma interface já em uso, as classes que a implementam não 			      compilarão mais.
 
 ● Diferença entre classes abstratas e interfaces
-Classe abstrata Interface
-Pode implementar métodos Não implementa nenhum
-método
-Uma classe pode ser subclasse
-de apenas uma classe abstrata
-Uma classe pode implementar
-múltiplas interfaces
-Define uma hierarquia que
-possui relação (“é-um”)
-Não define uma hierarquia
-(classes sem relação podem
-implementar uma mesma
-interface)
 
-A partir do Java 8, além dos métodos abstratos, também é
-possível definir dois outros tipos de métodos:
- default: permite acrescentar novos métodos a interfaces já em
-uso;
- static: permite definir métodos que não dependem de
-instanciação – pertencem à classe e não aos objetos.
- Esses métodos devem conter uma implementação (corpo) dentro
-da própria interface
- Se nenhum modificador default ou static for especificado, o
-método é reconhecido como abstract
+Classe abstrata 										Interface
+	Pode implementar métodos 							Não implementa nenhum método
+	Uma classe pode ser subclasse de apenas uma classe abstrata
+	Uma classe pode implementar múltiplas interfaces
+	Define uma hierarquia que possui relação (“é-um”)
+	Não define uma hierarquia (classes sem relação podem implementar uma mesma interface)
+
+A partir do Java 8, além dos métodos abstratos, também é possível definir dois outros tipos de métodos:
+
+ default: permite acrescentar novos métodos a interfaces já em uso;
+ static: permite definir métodos que não dependem de instanciação – pertencem à classe e não aos objetos.
+ Esses métodos devem conter uma implementação (corpo) dentro da própria interface
+ Se nenhum modificador default ou static for especificado, o método é reconhecido como abstract
 
 
