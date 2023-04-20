@@ -1,0 +1,325 @@
+Herança
+Por meio da Genética, é possível herdarmos
+características de nossos pais
+Herdamos atributos e comportamentos de
+nossos pais
+Em OO, classes também podem herdar características (atributos e
+comportamentos) de outra classe
+
+Criação de classes com base em uma classe já
+existente
+Objetivo: reuso de software e codificações versáteis
+Capacidade de reusar código pela especialização de
+soluções genéricas
+– A ideia é “ampliar” a funcionalidade de uma classe
+Todo objeto da subclasse também é um objeto da
+superclasse, mas NÃO vice-versa
+
+Herança representa um relacionamento de generalização entre
+classes:
+● É-um
+● É um tipo de
+
+Classe mãe, superclasse, classe base: A classe mais geral, a
+partir da qual outras classes herdam características
+Classe filha, subclasse, classe derivada: A classe mais
+especializada, que herda características (diferenciação) e que
+tem características próprias
+
+Vantagens:
+● Reutilização do código: não é
+necessário reinventar a roda
+● É possível modificar uma classe
+para criar uma nova classe
+● Diversos objetos que executam
+ações diferentes, mas com mesma
+origem
+
+Nem todos os atributos e métodos da superclasse são
+acessíveis na subclasse - depende dos modificadores de
+acesso. Em Java:
+ private (-): acesso exclusivo da classe - não
+permite acesso por outras classes, nem mesmo
+subclasses
+ default (ausente): acesso por quaisquer classes no
+mesmo diretório (pacote), também chamado
+package-private
+ protected (#): acesso por quaisquer classes no
+mesmo diretório, e por subclasses de qualquer
+lugar
+ public (+), sem controle de acesso
+
+Herança - encapsulamento
+
+Nem todos os atributos e métodos da superclasse são
+acessíveis na subclasse - depende dos modificadores de
+acesso. Em Java:
+ private (-): acesso exclusivo da classe - não
+permite acesso por outras classes, nem mesmo
+subclasses
+ default (ausente): acesso por quaisquer classes no
+mesmo diretório (pacote), também chamado
+package-private
+ protected (#): acesso por quaisquer classes no
+mesmo diretório, e por subclasses de qualquer
+lugar
+ public (+), sem controle de acesso
+
+		Classe | Subclasse no mesmo pacote | Pacote(mesmo pacote) | Subclasse em outro pacote | Exterior(pacotes diferentes) | 
+public + 	  OK 	            OK			      OK                       OK                             OK
+protected #       OK                OK                        OK                       OK                             Não
+<ausente>(padrão) OK                OK                        OK                       Não                            Não
+private -         OK                Não                       Não                      Não                            Não
+
+public + 
+protected # Pode tudo no mesmo pacote, e em subclasses em qualquer lugar
+<ausente>(padrão) - Pode tudo no mesmo package
+private - Não pode nada
+
+Classes podem ter apenas dois modificadores:
+- public: a classe pode ser usada em qualquer lugar
+- nenhum modificador (default): a classe é packageprivate, só pode ser usada dentro do pacote.
+
+Polimorfismo
+
+• Habilidade de ter muitas formas
+• Do Grego poly (muitas) + morpho (formas)
+• Habilidade de objetos em responder a um mesmo
+método de maneira diferente
+– Métodos com mesmo nome, mas implementados de maneira
+diferente
+Códigos genéricos para:
+- processar diversos tipo de dados
+- processar os mesmos dados de maneiras diferentes
+- fazer um mesmo objeto ter comportamentos diferentes para uma
+mesma ação/solicitação
+
+Pode ocorrer de duas maneiras:
+– Por sobreposição (Overriding)
+– Por sobrecarga (Overloading)
+
+Polimorfismo - sobrescrita
+
+Redefinição de uma função herdada
+– A classe derivada tem uma função com a mesma assinatura da
+classe base, mas funcionamento diferente
+– Função na classe derivada sobrepõe a função da classe base
+
+• Overriding, sobrescrita ou sobreposição
+• Substituição de um método da superclasse por outro, de
+mesmo nome, tipo de retorno, número e tipos de
+argumentos, mas comportamento diferente
+• Uma subclasse herda um método e implementa-o de maneira
+diferente
+
+● Casos nos quais a sobrescrita é indicada:
+1) A classe mãe (abstrata) não oferece implementação para
+o método, somente a declaração
+2) A implementação do método na classe mãe não é
+adequada na classe filha
+3) A classe filha pretende estender as funcionalidades da
+classe mãe
+
+● Regra:
+– O método da subclasse deve ser declarado exatamente com
+o mesmo nome, tipo de retorno, e lista de parâmetros
+(inclusive a ordem)
+– O modificador de acesso pode mudar, mas o método na
+subclasse não pode ser menos acessível
+
+Exemplo:
+ Considere as seguintes classes
+public class ObjetoGeo {
+...
+public void desenha(Graphics g);
+}
+public class Retangulo extends ObjetoGeo {
+...
+public void desenha (Graphics g) {
+g.drawRect (x, y, lado, lado2);
+}
+}
+public class Circulo extends ObjetoGeo {
+...
+public void desenha (Graphics g) {
+g.drawCircle (x, y, raio);
+}
+}
+A classe mãe
+especifica um
+método
+desenha
+Cada classe filha
+fornece uma
+implementação
+diferente para a
+mesma
+especificação do
+método desenha
+Polimorfismo - sobrescrita
+● Exemplo IMPORTANTE: polimorfismo em uso
+...
+for (int i = 0; i < desenhos.size(); i++) {
+ObjetoGeo x = desenhos[i];
+x.desenha(g);
+}
+...
+Será decidido automaticamente qual implementação
+invocar, dependendo do objeto:
+“ligação dinâmica” (“dinamic binding” )
+
+Exemplo IMPORTANTE: polimorfismo em uso
+...
+for (int i = 0; i < desenhos.size(); i++) {
+ObjetoGeo x = desenhos[i];
+x.desenha(g);
+}
+...
+Será decidido automaticamente qual implementação
+invocar, dependendo do objeto:
+“ligação dinâmica” (“dinamic binding” )
+
+Classes abstratas
+
+• Em determinadas circunstâncias é necessário criar classes
+que sejam modelos, mas que não se transformem em
+objetos concretos
+• Os tipos de classes que utilizamos até agora são definidas como
+classes concretas: sua instanciação cria um objeto
+
+• Pode-se implementar classes que definem
+comportamentos “genéricos” ou abstratos:
+– A essência da superclasse é definida e pode ser parcialmente, ou
+totalmente, implementada
+– Não podem ser instanciadas
+– Detalhes são definidos em subclasses especializadas
+
+Classe abstrata (ou virtual): classe da qual nunca são
+criadas instâncias (objetos)
+– existe para reunir características comuns que seus
+descendentes devem ter (ou satisfazer)
+– serve como modelo (de requisitos) para criação de classes
+descendentes
+
+● Método abstrato:
+● Método que só pode ser definido em uma classe abstrata
+● Não é implementado na classe onde ele é definido
+● Deve ser obrigatoriamente implementado em toda classe
+herdeira
+● É usado para determinar um padrão para todas as classes
+herdeiras
+
+Classes abstratas Duas finalidades para abstract:
+1) O método na classe mãe não faz sentido, por exemplo:
+class Forma{
+public float calculaArea(){ return -1.0f; }
+}
+2) O programador poderia não implementar o método na
+classe específica, o que acarretaria problemas de
+funcionalidade.
+Solução:
+abstract class Forma{
+public abstract float calculaArea();
+}
+Resultado:
+O programador é obrigado a redefinir o método calculaArea, do
+contrário, não poderá usá-lo
+
+Interfaces: polimorfismo sem
+herança
+
+Definição:
+- Conjunto de assinaturas de métodos (sem
+implementação)
+- Contrato firmado por uma classe para garantir um conjunto
+de funcionalidades a seus objetos
+ Alternativa à classe abstrata para se definir
+especificações de funcionamento
+
+Uso:
+1. Capturar similaridades de comportamento entre classes
+não relacionadas
+2. Superclasse abstrata não seria natural, pois não há
+“parentesco” entre as classes
+3. Exigir métodos que uma ou mais classes não relacionadas
+devem necessariamente implementar
+4. Revelar uma interface de programação sem revelar as
+classes que a usam
+
+Em Java: uma interface é uma classe abstrata pura
+• Só tem métodos abstratos (sem implementações)
+ Todos os métodos são public e abstract
+• Sem atributos, a menos que sejam constantes (public, static, e final)
+• Não tem construtores
+
+● Exemplo
+● Sejam as seguintes classes, em um sistema de gerenciamento de
+empresas:
+
+classe Empregado:
+● nome,
+● valor recebido por hora de trabalho,
+● horas trabalhadas durante o mês,
+
+classe ContaAPagar:
+● tipo da conta,
+● data de vencimento da conta,
+● valor da conta,
+● valor do desconto para pagamento antes do vencimento
+
+● Semanticamente estas classes possuem pouco, ou nada,
+em comum
+● Entretanto, os objetos de ambas as classes representam
+uma despesa que deve ser quitada no final do mês
+● Cada objeto, não importa a classe, deve ser capaz de
+“calcular o valor total de pagamento”
+
+● Cabe a seguinte interface:
+interface Pagavel {
+double getValorPagamento();
+}
+● E fazer com que ambas as classes implementem esta
+interface e, consequentemente, tenham que implementar o
+método getValorPagamento
+
+- Em Java, uma classe pode satisfazer a várias interfaces
+- Dizemos que a classe “implementa” essas interfaces
+- Ela deve implementar todos os métodos de cada interface
+- Se assemelha a herança múltipla
+
+Vantagens:
+Deixa código mais reutilizável
+Provê ocultamento da informação
+Provê interface comum que classes devem implementar
+Cuidado:
+Não é possível acrescentar métodos a uma interface já
+em uso, as classes que a implementam não compilarão
+mais.
+
+● Diferença entre classes abstratas e interfaces
+Classe abstrata Interface
+Pode implementar métodos Não implementa nenhum
+método
+Uma classe pode ser subclasse
+de apenas uma classe abstrata
+Uma classe pode implementar
+múltiplas interfaces
+Define uma hierarquia que
+possui relação (“é-um”)
+Não define uma hierarquia
+(classes sem relação podem
+implementar uma mesma
+interface)
+
+A partir do Java 8, além dos métodos abstratos, também é
+possível definir dois outros tipos de métodos:
+ default: permite acrescentar novos métodos a interfaces já em
+uso;
+ static: permite definir métodos que não dependem de
+instanciação – pertencem à classe e não aos objetos.
+ Esses métodos devem conter uma implementação (corpo) dentro
+da própria interface
+ Se nenhum modificador default ou static for especificado, o
+método é reconhecido como abstract
+
+

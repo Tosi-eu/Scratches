@@ -1,0 +1,326 @@
+UML, (Linguagem de Modelagem Unificada), uma
+linguagem visual utilizada nas etapas de análise e
+projeto de sistemas
+A UML se tornou a linguagem padrão de projeto de
+software, adotada internacionalmente pela indústria de
+Engenharia de Software
+
+UML não é uma linguagem de programação!
+É uma linguagem de modelagem utilizada para
+representar o sistema de software sob os seguintes
+parâmetros:
+Requisitos
+Comportamento
+Estrutura lógica
+Dinâmica de processos
+Comunicação/Interface com os usuários
+
+Por que modelar um sistema?
+• Sistemas são complexos; é necessário decompô-los em pedaços
+compreensíveis abstraindo-se aspectos essenciais;
+• Diagramas auxiliam no entendimento do problema;
+• Linguagem comum que permite aos desenvolvedores entender quais
+objetos fazem parte do sistema e como se comunicam;
+• O modelo induz ao projeto: previsão das necessidades, problemas, e
+limitações.
+
+Surgiu da união de outras linguagens de modelagem:
+ O método de Booch (Grady Booch da Rational Software
+Corporation)
+ O método OMT (Object Modeling Technique), de Ivar Jacobson, da
+Objectory
+ Método OOSE (Object–Oriented Sofware Engineering), de James
+Rumbaugh, da General Eletrics
+Até a década de 90, estes eram as linguagens de
+modelagem mais populares
+
+Objetivo da UML
+
+Fornecer múltiplas visões do sistema
+Representadas por diagramas UML
+ Cada diagrama analisa o sistema sob um determinado
+aspecto, sendo possível ter enfoques mais amplos
+(externos) ou mais específicos (internos)
+
+Vantagens & Desvantagens da UML
+
+– Custos
+• Maior trabalho na modelagem
+• Mais tempo gasto
+– Ganhos
+• Menos trabalho na construção
+–A solução está pronta
+–Menos tempo gasto
+• Problemas encontrados em tempo hábil para sua solução
+• Dúvidas sanadas mais cedo
+
+Diagrama de classes
+
+• O diagrama de classes é o mais utilizado
+• Objetivo: visualização das classes que irão compor o
+sistema com respectivos atributos e métodos, bem como
+relacionamentos
+• Visão estática do sistema
+• Estrutura lógica
+– Classes, associações, interfaces
+
+Uma classe possui a notação de um
+retângulo dividido em três partes:
+1. Nome da Classe;
+2. Atributos da Classe;
+3. Métodos da Classe;
+
+Forma completa de um atributo:
+visibilidade nome : tipo = valor_inicial {propriedades}
+– Visibilidade: public (+), private (-), protected (#)
+– Tipo do atributo: ex: int, float, double, String, Date, …
+– Valor inicial: definido no momento da criação do objeto
+– Propriedades: ex.: {read-only, const}
+– Exemplos:
+- sNome: String = null
++ PI: double = 3.13 {const}
+
+• Forma completa de um método:
+visibilidade nome(tipo): tipo {propriedades}
+– Visibilidade: public (+), private (-), protected (#)
+– Tipo do atributo: ex: int, float, double, String, Date, …
+– Propriedades: ex.: {const, abstract}
+– Exemplos:
++ getNome():void {abstract}
++ calcularArea(Forma):float
++ calculaPotencia(double, double):double {const}
+
+Relacionamentos entre Classes
+
+● Como diferentes classes se relacionam?
+● Identificar as maneiras de conexão entre classes
+● Representar estes relacionamentos no diagrama de
+classes
+● Relações fornecem um caminho para a comunicação
+entre as classes (para seus respectivos objetos)
+
+Relacionamentos
+Tipos:
+1) Generalização - “é um”
+2) Associação – “usa”
+3) Agregação – “é parte de” (possui)
+4) Composição - “é parte essencial de” (é dono de)
+
+Generalização
+
+Relacionamentos entre classes do tipo “é um”
+
+–Também chamado de herança
+–Ex: Um cachorro é um mamífero
+● Abstração de Generalização/Especialização
+–A partir de duas ou mais classes, abstrai-se uma classe mais
+genérica;
+–Ou de uma classe geral, deriva-se outra mais específica
+–Sub-classes possuem todas as propriedades das classes as
+quais elas especializam
+–Pelo menos uma propriedade/método distingue duas classes
+especializadas
+
+No diagrama de classes:
+–A generalização é representada com uma seta do lado
+da classe mais geral (classe base)
+
+Organiza as classes hierarquicamente
+● Técnica de reutilização de software
+– Novas classes a partir de classes existentes,
+absorvendo seus atributos e comportamentos, e
+recebendo novos recursos
+
+Associação Simples, Composição, e
+Agregação
+
+Relacionamentos
+Relacionamentos são caracterizados por:
+● nome: descrição, usualmente um verbo (faz, tem, possui,...)
+● navegabilidade: indicada por uma seta
+• Uni (uma flecha) ou bidirecional (sem
+flechas/duas flechas)
+● multiplicidade: 0..1, 0..*, 1, 1..*, 2, 3..7
+● tipos de relacionamentos com multiplicidade: associação,
+agregação, e composição
+
+Nomeando Relacionamentos
+• Para facilitar, um relacionamento pode ser nomeado
+• Um “rótulo” colocado ao longo da linha de associação
+• Usualmente um verbo ou uma frase verbal
+
+Navegabilidade
+Navegabilidade indica se uma classe, ou se ambas as classes
+se relacionam:
+
+Se A tem seta pra B, A se relaciona ccom B e B n sabe da existência de A. O contrário também é válido, assim como também é possível de haver relacionamentos mútuo, ou seja, setas para os dois
+
+Multiplicidade
+Multiplicidade: número de instâncias de uma classe relacionada
+com uma instância de outra classe
+Na conexão entre Professor e Aluno:
+- Para cada instância de Professor, podem se relacionar de 3 a 55
+Alunos
+
+Exemplos:
+- Uma mesa de restaurante pode ter vários ou nenhum pedido
+- Uma cotação pode incluir no mínimo 1 e no máximo * (muitos)
+itens cotados
+- Uma loja pode ter de 0 até 3 funcionários
+
+Associação simples (“usa um”)
+● Forma mais fraca de relacionamento entre classes
+– As classes são independentes
+– São representadas como linhas conectando às classes participantes
+– Podem ter um nome identificando a associação
+– Seta indicando que a associação somente pode ser utilizada em uma
+única direção (o mais usual e adequado)
+- Representa relacionamentos “usa um”
+-Ex.: uma pessoa “usa uma” calculadora
+-Na implementação: um objeto A usa outro objeto B
+chamando um método público de B
+
+A associação simples também é chamada de
+dependência.
+ Diagramas de dependência são o primeiro diagrama
+usado para compreender um código que não é seu.
+
+Para que um passageiro viaje, ele precisa apenas de uma indicação de por
+qual Avião ele deve viajar;
+Ele não precisa ter como parte de sua informação, a referência a um avião.
+Leitura unidirecional:
+- Um passageiro viaja em um avião
+
+Leitura bidirecional:
+- Um professor ministra 1 ou mais disciplinas
+- Uma disciplina é ministrada por 1 ou mais professores
+- Uma disciplina é cursada por 10 ou mais alunos
+- Um aluno cursa 1 ou mais disciplinas
+
+Agregação e Composição
+● No diagrama de classes:
+–Composição: associação representada com um losango
+sólido do lado todo
+–Agregação: associação representada com um losango
+sem preenchimento do lado todo
+
+Classe todo
+- Classe resultante da agregação ou composição
+Classe parte
+- Classe cujas instâncias formam a agregação/composição
+Exemplo:
+- Prédio e Apartamento: um prédio tem apartamentos
+- Classe Prédio: todo ou agregada
+- Classe Apartamento: parte
+
+● Relacionamentos do tipo “tem um”
+– Relacionamento todo/parte
+• Uma classe é formada por ou contém objetos de
+outras classes
+– Exemplos:
+● Um carro possui rodas
+● Uma árvore é composta de folhas, tronco,
+raízes,...
+● Um computador é composto de CPU, teclado,
+mouse, monitor, ...
+
+Agregação vs Composição
+● A agregação é uma forma mais fraca de composição
+– Composição: as partes não podem existir
+independentes do todo
+• Se o todo é destruído as partes são destruídas também
+• Uma parte pode ser de um todo por vez
+– Agregação: não satisfaz um ou mais desses critérios
+• A destruição do objeto todo não implica a destruição do
+objeto parte
+• Um objeto pode ser parte componente de vários outros
+objetos
+
+Tanto agregação como composição implicam na presença
+de um atributo do tipo Parte na classe Todo.
+A composição indica que quando uma instância da classe
+Todo deixar de existir, então as correspondentes
+instâncias Parte também deverão deixar de existir.
+ Exemplo icônico: um carro é composto por rodas,
+motor, direção, suspensão, etc; e é agregado por um
+motorista. A existência do carro não depende da
+existência do motorista, já um carro sem motor não
+existe
+
+Não faz sentido que Folha, Raiz, ou Tronco existam sem que sejam
+atributos de uma árvore (neste modelo em particular).
+Segundo o diagrama, não pode haver uma árvore sem Folha, Raiz, ou
+Tronco, pois a cardinalidade mínima é 1.
+
+Composição: exemplo
+
+Dedo Mão
+
+
+Em código, poderíamos ter:
+class Mao{
+Dedo[ ] dedos;
+...
+}
+Ou
+class Mao{
+ArrayList<Dedo> dedos;
+...
+}
+
+Agregação: exemplo
+
+Rede de
+Computadores
+Computador
+0..*
+Um computador existe
+Independentemente de uma rede
+Um computador pode estar ligado a mais
+de uma rede ao mesmo tempo
+Uma Rede pode ter nenhum computador.
+
+Um livro existe independente de um empréstimo.
+Mas Empréstimo precisa ter, obrigatoriamente, um
+livro.
+
+Pessoa
+(seta apontada para pessoa)
+Endereço
+de contato
+
+Se a pessoa é eliminada do sistema, não faz sentido
+manter o endereço de contato.
+Mas não se pode ter uma pessoa sem endereço de
+contato pois a cardinalidade exata é 1.
+
+Relacionamentos: qual usar?
+Como saber qual relacionamento deve ser utilizado?
+•Existem atributos ou métodos sendo aproveitados por
+outras classes? A subclasse “é do tipo” da superclasse?
+•Sim: Isso é herança
+•Não: Existe todo-parte?
+•Não: Isso é associação
+•Sim: A parte vive sem o todo?
+–Sim: Isso é agregação
+–Não: Isso é uma composição
+
+Embora seja um padrão, o UML varia (bastante) entre
+diferentes fabricantes de software
+● Cada ferramenta contém especificidades e variações
+● Foram vistos apenas os principais relacionamentos
+entre classes, o padrão prevê outros
+● Mais adiante veremos os relacionamento de Realização
+(entre classe abstrata e suas derivações) e de
+Implementação (entre interfaces e classes)
+
+Todo diagrama UML tem um correspondente código, mas
+o contrário nem sempre é verdadeiro;
+● Uma linguagem de programação tem muito mais
+possibilidades do que o UML, o qual é uma linguagem de
+projeto;
+● UML é para se conversar com o cliente, com o gerente,
+com o engenheiro de software, e não necessariamente
+com os programadores.
+
+
