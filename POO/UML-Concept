@@ -92,10 +92,10 @@ Relacionamentos entre Classes
 Relacionamentos
 
 Tipos:
-	1) Generalização - “é um”
-	2) Associação – “usa”
-	3) Agregação – “é parte de” (possui)
-	4) Composição - “é parte essencial de” (é dono de)
+	1) Generalização - “é um” - usa seta não pintada e reta contínua - sentido "filho -> pai"
+	2) Associação – “usa” - seta no estilo ">", reta continua - sentido "pai -> filho" [indicando quantidade pai para quantidade filhos]
+	3) Agregação – “é parte de” (possui) -> losango vazio saindo do todo, sendo uma seta no estilo ">" em uma reta contínua até a classe parte
+	4) Composição - “é parte essencial de” (é dono de) losango pintado saindo do todo, sendo uma seta no estilo ">" em uma reta contínua até a classe parte
 
 Generalização
 
