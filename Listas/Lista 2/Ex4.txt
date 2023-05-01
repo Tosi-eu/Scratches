@@ -3,7 +3,7 @@ Parte 1:
 +--------------------+             +-----------------+
 | OperaçãoMatemática |             |     Usuário     |
 +--------------------+             +-----------------+
-| -operando1: float  |             | - nome: String  |
+| -operando1: float  |-------------| - nome: String  |
 | -operando2: float  |             | - idade: int    |
 | -tipo: String      |             | - cpf: String   |
 | -data: Data        |             +-----------------+

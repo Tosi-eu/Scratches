@@ -1,0 +1,96 @@
+➔ Ojbetivo: otimizar o acesso aos arquivos, especialmente reduzindo o tempo de busca
+
+➔ Queremos informações agrupadas, para termos mais chances de retornarmos com todos dados requeridos, com o menor número de acessos a disco
+
+Sistema de Arquivos
+➔ Formatação Física (Organizado em disco em setores/ trilhas)
+➔ Formatação Lógica
+	◆ ‘Instala’ o sistema de arquivos no disco:
+		● Subdivide o disco em regiões endereçáveis
+		● Grava estruturas de gerenciamento dos arquivos
+		● Overhead de espaço ocupado com informações para gerenciamento
+
+Operações Sistema de Arquivos
+
+criar (create, open) 
+destruir ou remover (delete)
+renomear (rename) 
+abrir (open)
+fechar (close) 
+ler dados (read)
+escrever dados (write) 
+escrever dados no final (append)
+posicionar (seek) 
+
+Arquivos Físico e Lógico
+➔ Arquivo Físico:
+	◆ Sequência de bytes armazenada no disco em blocos
+distribuídos em trilhas/ setores.
+➔ Arquivo Lógico:
+	◆ Arquivo como visto pelo aplicativo que o acessa –
+sequência contínua de registros ou bytes.
+➔ Associação arquivo físico/ arquivo lógico:
+	◆ Gerenciada pelo Sistema de Arquivo/ S.O.
+
+Quanto maior o tamanho da página de disco, maior a fragment ação int erna, porém o número de acessos a disco
+tende a ser menor!
+
+➔ Cada entrada na tabela possui a localização física do cluster (página) associado a um arquivo lógico
+➔ 1 seek para localizar 1 cluster:
+	◆ Todos os setores do cluster são lidos sem necessidade de seeks adicionais.
+
+➔ FAT32 (Windows 95 e posteriores):
+	◆ clusters de tamanho menor, endereça mais clusters, menos fragmentação interna
+➔ NTFS (New Technology File System):
+	◆ Sistemas OS/ 2 (IBM) e Windows NT;
+	◆ Mais eficiente: a menor unidade de alocação é o próprio setor de 512 bytes
+
+Exemplo de Cálculo de Tempo de Acesso
+➔ Tempo total = número de trilhas * Total de processamento por trilha
+➔ Processamento por trilha
+	◆ Seek + Latência + Transferência
+➔ Tempo total = 100 * (8 + 3 + 6) = 100 * 17
+➔ Tempo total = 1.700ms = 1,7s
+
+➔ Segunda situação (espalhados):
+	◆ 2.125 páginas alocadas dispersas pelo disco
+➔ Supor os seguintes tempos:
+	◆ Tempo de busca médio: 8 ms
+	◆ Delay de rotação: 3 ms
+	◆ Tempo de leitura de 1 página: 0,28 ms
+➔ Tempo total = número de páginas * Total de processamento por página
+➔ Processamento por página
+	◆ Seek + Latência + Transferência
+➔ Tempo total = 2125 * (8 + 3 + 0,28) = 2.125 * 11,28
+➔ Tempo total = 23.900ms = 23,9s
+
+Arquivo Lógico
+➔ Maioria das linguagens de programação
+◆ Informações lidas e gravadas em arquivos como streams de bytes
+	● Gerenciar arquivos
+		○ Gerenciar esses streams
+➔ Não importa qual a fonte e organização do arquivo físico!
+➔ Tudo isso é abstraído pelo SO
+
+Acesso Sequencial vs Aleatório
+➔ Leitura sequencial: ponteiro de leitura avança byte a byte (ou por blocos), a partir de uma posição inicial
+➔ Acesso aleatório (direto): posicionamento em um byte ou registro arbitrário
+
+Técnicas p/ Minimizar o Tempo de Escrita e Leitura em Arrquivos
+➔ Multiprogramação: CPU trabalha em outro processo enquanto aguarda o disco
+➔ Stripping : o arquivo é repartido entre vários drives (paralelismo)
+➔ RAID: (redundant array of inexpensive disks):
+◆ Stripping (RAID 0), Mirroring (RAID 1)
+➔ Disk cache: blocos de memória RAM configurados para conter páginas de dados do disco
+➔ RAM Disk: simula em memória o comportamento do disco mecânico
+
+Organização de Arquivos
+➔ Meta: criar estruturas para minimizar as desvantagens do uso da memória secundária
+➔ Objetivo: minimizar o tempo de acesso ao dispositivo de armazenamento secundário
+➔ Ideal (encontrar a informação em um único acesso)
+➔ Se não for possível, precisamos encontrar em poucos acessos
+● Ex: uma busca binária não é eficiente o suficiente
+
+➔ Estruturas de dados eficientes em memória principal são inviáveis em memória secundária
+➔ Uma das dificuldades de obter uma estrutura de dados adequada é a constante necessidade de alterações nos arquivos
+

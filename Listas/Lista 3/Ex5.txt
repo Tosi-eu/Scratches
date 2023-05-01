@@ -1,80 +1,77 @@
-a)
-
 public interface Dispositivo {
-    void ligar();
-    void desligar();
+    void ligarDesligar();
     int checarStatus();
     void calibrar();
 }
 
-public class Main {
-    public static void main(String[] args) {
-        List<Dispositivo> dispositivos = new ArrayList<>();
-        dispositivos.add(new Mouse());
-        dispositivos.add(new Teclado());
-        dispositivos.add(new Impressora());
-        dispositivos.add(new Video());
-
-        for (Dispositivo dispositivo : dispositivos) {
-            dispositivo.ligar();
-            dispositivo.calibrar();
-            dispositivo.desligar();
-            int status = dispositivo.checarStatus();
-            System.out.println("Status do dispositivo: " + status);
-        }
+public abstract class Impressora implements Dispositivo {
+    private String modelo;
+    private String marca;
+    
+    public Impressora(String modelo, String marca) {
+        this.modelo = modelo;
+        this.marca = marca;
     }
-}
-
-
-b)
-
-public interface Dispositivo {
-    void ligar();
-    void desligar();
-    int checarStatus();
-    void calibrar();
-}
-
-public abstract class ImpressoraAbstrata implements Dispositivo {
-    @Override
-    public void ligar() {
-        System.out.println("Ligando a impressora...");
+    
+    public String getModelo() {
+        return modelo;
     }
-
-    @Override
-    public void desligar() {
-        System.out.println("Desligando a impressora...");
+    
+    public String getMarca() {
+        return marca;
     }
-
-    @Override
+    
+    public void ligarDesligar() {
+        System.out.println("Impressora " + modelo + " da marca " + marca + " foi ligada/desligada.");
+    }
+    
     public int checarStatus() {
-        System.out.println("Checando o status da impressora...");
+        System.out.println("Verificando status da impressora " + modelo + " da marca " + marca + ".");
         return 0;
     }
-
-    @Override
+    
     public void calibrar() {
-        System.out.println("Calibrando a impressora...");
+        System.out.println("Calibrando impressora " + modelo + " da marca " + marca + ".");
     }
-
+    
     public abstract void imprimir();
 }
 
-public class Impressora extends ImpressoraAbstrata {
-    @Override
+public class ImpressoraJatoTinta extends Impressora {
+    public ImpressoraJatoTinta(String modelo, String marca) {
+        super(modelo, marca);
+    }
+    
     public void imprimir() {
-        System.out.println("Imprimindo...");
+        System.out.println("Imprimindo com impressora jato de tinta " + getModelo() + " da marca " + getMarca() + ".");
     }
 }
 
-public class Main {
+public class ImpressoraLaser extends Impressora {
+    public ImpressoraLaser(String modelo, String marca) {
+        super(modelo, marca);
+    }
+    
+    public void imprimir() {
+        System.out.println("Imprimindo com impressora laser " + getModelo() + " da marca " + getMarca() + ".");
+    }
+}
+
+public class TesteImpressoras {
     public static void main(String[] args) {
-        Impressora impressora = new Impressora();
-        impressora.ligar();
-        impressora.calibrar();
-        impressora.imprimir();
-        impressora.desligar();
-        int status = impressora.checarStatus();
-        System.out.println("Status da impressora: " + status);
+        ImpressoraJatoTinta impressoraJato = new ImpressoraJatoTinta("PIXMA", "Canon");
+        ImpressoraLaser impressoraLaser = new ImpressoraLaser("LaserJet", "HP");
+        
+        Dispositivo[] dispositivos = {impressoraJato, impressoraLaser};
+        
+        for (Dispositivo d : dispositivos) {
+            d.ligarDesligar();
+            d.checarStatus();
+            d.calibrar();
+            
+            if (d instanceof Impressora) {
+                ((Impressora) d).imprimir();
+            }
+        }
     }
 }

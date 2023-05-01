@@ -40,6 +40,7 @@ public class Produto {
     public int retirarEstoque(int quantidade) {
         int retirado;
         if (quantidade > quantidadeEstoque) {
+		System.out.println("Quantidade em estoque inferior ao requisitado, retirando agora " + this.quantidadeEstoque);
             retirado = quantidadeEstoque;
             quantidadeEstoque = 0;
         } else {

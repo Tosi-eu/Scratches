@@ -1,36 +1,28 @@
-+-------------------+              +----------------------+              +-----------------+
-|       Curso       |              |        Turma         |              |     Matrícula   |
-+-------------------+              +----------------------+              +-----------------+
-| - nome            |              | - horário            |              | - aluno         |
-| - cargaHoraria    |              | - sala               |              | - turma         |
-| - valor           |              | - vagasDisponiveis   |              | - dataMatricula |
-| - descrição       |              | - númeroMatriculas   |              +-----------------+
-|                   | 1          * |                      | 1            |                 |
-+-------------------+------------->+----------------------+<-------------------------------+
-| + getCargaHoraria |              | + getHorario         |              |+getDataMatricula|
-| + getValor        |              | + getSala            |              |+getAluno        |
-| + getDescricao    |              | + getVagasDisponiveis|              |+getTurma        |
-+-------------------+              | + getNumeroMatriculas|              +-----------------+
-                                   |			    |	
-                                   |			    |
-                                   |  10 <= numMatriculas |
-                                   |			    |
-                                   |			    |
-                                   +----------------------+			    
-                                   |
-                                   |
-                                   v
-                           +------------------------+
-                           |         Aluno          |
-                           +------------------------+
-                           | - nome                 |
-                           | - cpf                  |
-                           | - endereco             |
-                           | - telefone             |
-                           |                        |
-                           +------------------------+
-                           | + getNome              |
-                           | + getCpf               |
-                           | + getEndereco          |
-                           | + getTelefone          |
-                           +------------------------+
++------------------------------+             +------------------------------+
+|           Curso              |             |             Turma            |
++------------------------------+             +------------------------------+
+| -codigo: int                 |             | -codigo: int                 |
+| -nome: string                |             | -nome: string                |
+| -duracao: int                |             | -periodo: string             |
+| -professor: string           |             | -vagas: int                  |
+|                              |             | -matriculas: List<Matricula> |
+| +adicionarTurma(Turma): void |             | +adicionarMatricula(Matricula): void|
+| +removerTurma(Turma): void   |             | +removerMatricula(Matricula): void |
+| +buscarTurma(int): Turma     |             | +verificarMinimoDeMatriculas(): boolean |
++------------------------------+             +------------------------------+
+        |                                           |
+        |                                           |
+        |                                           |
+        |                                           |
++------------------------------+             +------------------------------+
+|          Matricula           |             |            Aluno             |
++------------------------------+             +------------------------------+
+| -codigo: int                 |             | -codigo: int                 |
+| -aluno: Aluno                |<------------|-nome: string                |
+| -turma: Turma                |             | -email: string               |
+| -dataMatricula: Date         |             | -telefone: string            |
+|                              |             | -matriculas: List<Matricula> |
+| +verificarDataLimite(): boolean|           | +adicionarMatricula(Matricula): void|
++------------------------------+             | +removerMatricula(Matricula): void |
+                                              +------------------------------+
+

@@ -1,0 +1,271 @@
+Índice
+➔ Mecanismo para localizar informação via chave por meio de mapeamento
+◆ Chave → localização da informação
+◆ ex: índice de um livro, catálogo de biblioteca...
+◆ Agiliza o trabalho de busca
+
+➔ No caso de arquivos:
+◆ Permite localizar registros rapidamente
+◆ Evita ter que reorganizar o arquivo de dados conforme este for modificado
+➔ Não é necessário manter arquivo ordenado
+
+➔ Arquivo de Índice (index file):
+◆ Impõe “ordem” a um arquivo de dados sem precisar rearranjar o arquivo em si
+◆ Permite acesso a registros via chave sem precisar varrer o arquivo de dados
+◆ Permite várias visões diferentes de um mesmo arquivo de dados
+● Acesso por índices diferentes
+◆ Permite acesso rápido a arquivos com registros de tamanho variável
+
+Índice Primário
+➔ Exemplo Prático (Arquivo de CDs de músicas)
+◆ Registros de tamanho variável com:
+● ID Number: Número de identificação
+● Title: Título
+● Composer: Compositor(es)
+● Artist: Artista(s)
+● Label: Rótulo (código da gravadora)
+◆ Chave primária:
+● Combinação de Label e ID Number
+
+Arquivo de Índice
+➔ Cada par (chave , localização) é um registro
+◆ Implementação eficiente usa registros de tamanho fixo
+	● Campos de tamanho fixo => chave primária e localização (RRN ou byte offset)
+	● Pode eventualmente conter outros campos
+		○ Ex.: tamanho do registro no arquivo de dados
+
+➔ Em geral, mantido ordenado
+◆ Permite busca binária (BB) se forem registros de
+tamanho fixo
+➔ Menor e mais simples que o arquivo de dados original
+◆ Muitas vezes cabe todo em memória primária
+	● Busca e manutenção mais eficientes! 
+
+➔ O Arquivo de Dados, em contraste…
+◆ Cada registro no arquivo de dados possui um correspondente no arquivo de índice
+◆ Em geral, muito maior que o arquivo de índices
+◆ Em geral, possui registros de tamanho variável
+◆ Em geral, “organizado” segundo a ordem de entrada dos registros
+	● Entry sequenced file
+
+Operações Básicas - Índices em Memória Primária
+➔ Criação dos arquivos de índice (index file) e de dados(data file);
+➔ Carregar índice para memória (em geral em vetor);
+➔ Busca;
+➔ Inserção de registro;
+➔ Atualização de registro;
+➔ Eliminação de registro.
+
+➔ Busca
+◆ Localização da chave no índice é rápida
+◆ Em geral índice é mantido ordenado
+	● Pode-se usar Busca Binária
+◆ Se índice não estiver ordenado
+	● Busca é sequencial
+ Localização e recuperação do registro de dados
+	● O(1) acessos externos
+	● Qualquer consulta baseada na chave será O(1)
+	● Base também para operações de remoção e atualização baseadas em chave
+
+➔ Inserção
+◆ Novo registro é inserido no arquivo de dados
+	● No final do arquivo ou
+	● Seguindo uma política do tipo first-fit ou worst-fit
+◆ Um registro (entrada) correspondente é inserido no arquivo de índice
+	● Campos: chave e indicador do início do novo registro no arquivo de dados (byte offset ou RRN)
+	● Índice em vetor ordenado
+		○ Inserção demanda deslocamentos
+		○ Rápido em RAM!
+
+➔ Remoção
+◆ Registro é removido do arquivo de dados segundo alguma política de marcação de registros removidos (remoção lógica)
+◆ O registro correspondente é removido do índice
+	● Deslocamentos (remoção física)
+	● Ou marcação da entrada correspondente no vetor(lógica)
+
+➔ Atualização
+◆ Registro é alterado no arquivo de dados
+◆ Se atualização não muda o valor da chave:
+	● Se tamanho do registro não aumenta, nada muda no índice
+	● Caso contrário, altera-se apenas o byte offset no índice
+◆ Se atualização muda o valor da chave
+	● Altera-se o registro no vetor de índices em RAM
+		○ Chave e, se necessário, byte offset
+	● Reordena-se o vetor de índices
+	● No índice atualização pode ser tratada como remoção + inserção
+➔ Ao final de uma sessão de operações:
+◆ Se o índice foi alterado em RAM => atualizar o correspondente arquivo de índice no disco
+◆ Política de atualização definida de acordo com as características da aplicação
+
+Prevenção de Índices Desatualizados
+➔ É fundamental implementar um mecanismo que permita saber se o índice está atualizado em relação ao arquivo de
+dados
+➔ Uma possível estratégia:
+◆ Flag de status
+	● “Setado” no arquivo índice mantido em disco assim que a sua cópia na memória é alterada
+
+➔ Flag de status
+◆ Flag pode ser mantido no registro cabeçalho do arquivo índice
+	● Atualizado sempre que o índice é reescrito no disco
+◆ Se um programa detecta que o índice está desatualizado:
+	● Uma função é ativada para reconstruir o índice a partir do arquivo de dados
+
+Arquivos de Índices Grandes
+➔ Se o índice não cabe na memória primária
+◆ Acesso e manutenção feitos em memória secundária
+◆ Nada muda para o arquivo de dados
+
+➔ Busca
+◆ Busca sequencial => O(n) acessos
+◆ Busca Binária => O(log n) acessos
+	● Pode demandar um acesso para cada registro verificado
+
+➔ Remoção
+◆ Alternativa 1:
+	● Deslocar todos os registros subsequentes no arquivo de índice para preencher espaço do registro removido
+		○ Otimiza espaço, mas a um custo computacional altíssimo...
+
+◆ Alternativa 2:
+	● Colocar um marcador e encadear o registro removido em uma lista de registros de índice disponíveis
+		○ Análogo ao que é feito para o arquivo de dados
+
+ Alternativa 3:
+	● Apenas marcar os registros como disponíveis (sem lista)
+
+➔ Inserção (alternativa 3 de remoção)
+◆ Para BB: Chave inserida deve respeitar ordem do índice
+	● Busca-se pela localização onde a chave deveria ser inserida (BB)
+	● Se localização corresponde a um slot disponível, tudo resolvido
+	● Caso contrário, é necessário deslocar todos os registros de índice subsequentes até o próximo
+	slot vago ou EOF
+
+➔ Atualização
+◆ Se atualização muda o valor da chave:
+	● Trata-se como uma remoção + inserção de registro de índice
+◆ Se atualização não muda o valor da chave:
+	● Se tamanho do registro não aumenta, nada muda no índice
+	● Caso contrário, muda-se apenas o byte offset no índice
+
+Índice Secundário
+➔ Tipos de Índices Secundários
+◆ Fracamente ligado (Loose Binding)
+	● Relaciona uma chave secundária à chave primária
+◆ Fortemente ligado (Tight Binding)
+	● Relaciona uma chave secundária diretamente ao registro no arquivo de dados
+
+Índice Secundário Fracamente Acoplado
+➔ Diferença importante entre os índices dos tipos primário e secundário:
+◆ Índice secundário:
+	● Permite múltiplos registros com chaves iguais
+	● Chaves duplicadas devem ser mantidas agrupadas e ordenadas internamente ao grupo de acordo com a chave 	primária
+	● Permite consultas eficientes envolvendo combinações de chaves secundárias
+		○ Múltiplos índices
+
+Operações Básicas
+➔ Busca
+◆ Pesquisar o índice de chave secundária para encontrar
+a chave primária relacionada
+◆ Usar a chave primária para pesquisar o índice de chave primária para encontrar o byte offset (ou RRN) do
+registro no arquivo de dados
+◆ Recuperar o registro no arquivo de dados
+
+➔ Inserção:
+◆ Inserir novo registro no arquivo de dados
+◆ Inserir a entrada correspondente no índice primário
+◆ Inserir a entrada correspondente em cada índice secundário
+	● Entradas duplicadas devem ser mantidas agrupadas e ordenadas
+	● Pode ser muito custoso se os arquivos de índices não couberem em RAM
+
+➔ Atualização (3 situações):
+◆ Situação 1:
+	● Alteração de chave secundária
+	● Índice secundário para esta chave precisa ser reordenado
+
+➔ Situação 2:
+◆ Alteração de chave primária
+◆ Índice primário precisa ser reordenado
+◆ Índices secundários precisam ser varridos e as entradas contendo a chave primária alterada devem ser atualizadas
+	● Se houver chaves secundárias duplicadas, pode ser necessário reordená-las localmente pela chave
+	primária
+
+➔ Situação 3:
+◆ Alteração de outros campos apenas
+◆ Não afeta nenhum dos índices
+◆ Se necessário: atualizar o byte offset do índice
+primário
+
+➔ Remoção (2 situações):
+◆ Abordagem delete all references
+	● Remover o registro do arquivo de dados
+	● Remover a entrada correspondente do arquivo de índice primário
+
+➔ Abordagem delete all references
+◆ Remover as entradas correspondentes de cada arquivo de índice secundário
+◆ Buscar o registro, gerenciar espaços vagos e reordenar registros em múltiplos arquivos de índices pode ser      custoso se não couberem em RAM
+
+➔ Abordagem Delete Some References
+	● Remover o registro no arquivo de dados
+	● Remover a entrada correspondente no arquivo de índice primário
+	● As entradas correspondentes nos índices secundários são mantidas
+
+Busca em Múltiplos Índices Secundários
+➔ Múltiplos índices permitem manter diferentes visões dos registros de um mesmo arquivo de dados
+◆ Consultas por chaves secundárias diferentes
+	● Localizar conjuntos de registros do arquivo de dados usando uma ou mais chaves
+
+➔ Possível fazer uma busca (consulta) em vários índices e combinar (AND, OR, NOT) os resultados individuais
+◆ Combina chaves relacionadas
+	● Consultas que combinam visões particulares
+
+Índice Secundário Fortemente Acoplado
+➔ Índice fortemente Acoplado
+◆ Relaciona chave secundária diretamente ao registro no arquivo de dados 
+
+➔ Busca
+◆ Pesquisar o índice de chave secundária para encontrar o byte offset (ou RRN) do registro no arquivo de dados
+
+➔ Inserção
+◆ Inserir o registro no arquivo de dados
+◆ Inserir a entrada correspondente em cada arquivo de índice secundário
+◆ Chaves duplicadas devem ser mantidas agrupadas e ordenadas
+
+➔ Remoção
+◆ Remover o registro no arquivo de dados
+	● Delete all references: remover a entrada correspondente em cada arquivo de índice secundário
+
+➔ Atualização
+◆ Situação 1: alteração de chave secundária
+	● Índice secundário para esta chave precisa ser reordenado
+◆ Situação 2: alteração de outros campos apenas
+	● Não afeta nenhum dos índices
+◆ Se necessário: atualizar o byte offset no índice secundário
+
+Índices Secundários Melhorados
+➔ Problemas nas estruturas de índices secundário vistas até agora:
+◆ Repetição de chaves secundárias
+	● Arquivos de índices secundários maiores que o necessário
+◆ Necessidade de rearranjar os índices mesmo quando o novo registro (inserção) tem um valor de chave secundária já existente
+● Ex: se uma nova gravação da Sinfonia no. 9 de Beethoven for inserida no arquivo de música
+
+➔ Solução 1: Vetor de Tamanho Fixo
+◆ Para índices fracamente acoplados
+	● Permitir a associação de múltiplas chaves primárias (tamanho fixo) a cada chave secundária
+◆ Elimina entradas com chaves secundárias duplicadas
+◆ Não é necessário reordenar o índice a cada inserção de
+registro com chave secundária já existente
+◆ Porém:
+	● É limitado a um número fixo de repetições da chave
+	● Quanto maior esse número, maior a fragmentação interna do arquivo de índice !
+		○ Talvez não compense a eliminação das chaves duplicadas
+
+➔ Solução 2: Listas invertidas
+◆ Para índices fracamente acoplados
+		● Cada chave secundária é associada a uma lista encadeada de chaves primárias (ordenadas)
+
+◆ Implementação:
+	● Para cada valor de chave secundária, cria-se no arquivo de índice secundário apenas uma entrada
+	com uma referência ao RRN do primeiro registro da lista encadeada que armazena as chaves primárias 	correspondentes
+	● As listas encadeadas de chaves primárias ORDENADAS correspondentes às chaves secundárias são mantidas em 	um arquivo sequencial separado, organizado segundo a entrada dos registros
+		○ Entry sequenced file 
+
+

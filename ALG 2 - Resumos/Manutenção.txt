@@ -1,0 +1,174 @@
+➔ A organização de um arquivo pode deteriorar durante o seu uso.
+➔ Exemplos:
+◆ O que deve ser feito com o espaço liberado por registros removidos?
+◆ E quando registros são atualizados em arquivos com registros de tamanho variável?
+
+➔ Projetista deve considerar modificações no arquivo
+◆ Adição, atualização e remoção de registros
+➔ Problema é simples quando:
+◆ Registros são de tamanho fixo
+◆ Apenas adições e atualizações ocorrem
+➔ Porém, em outras circunstâncias...
+
+➔ O que fazer com os dados adicionais?
+◆ Anexar ao final do arquivo e ligar as duas partes por “ponteiros” ?
+	● Processamento de cada registro (ao longo do arq. todo) fica muito mais complexo
+◆ Apagar o registro original e reescrevê-lo todo no final do arquivo ?
+	● Ok, é necessário reutilizar o espaço desocupado
+
+➔ Ex: remover um registro (tamanho fixo ou variável):
+◆ O que fazer com o espaço remanescente?
+● Necessário reutilizar o espaço vago
+➔ Foco de manutenção de arquivos: reaproveitamento de espaços vagos
+➔ OBS: uma atualização sempre pode ser vista como:
+◆ Atualização = Remoção + Adição
+
+➔ Compactação
+◆ Busca por regiões do arquivo que não contêm dados
+◆ Recupera os espaços `perdidos´
+➔ Reuso
+◆ Insere dados nos espaços vazios
+➔ Duas abordagens
+◆ Estática
+	Características da Abordagem Estática
+	➔ Técnica pode ser aplicada a
+	◆ Registros de tamanho fixo
+	◆ Registros de tamanho variável
+	➔ Frequência para se aplicar a técnica
+	◆ Depende da aplicação
+	◆ Depende da porcentagem de registros marcados como removidos
+
+◆ Dinâmica
+	➔ Em aplicações on-line, que acessam arquivos altamente voláteis, pode ser necessário um processo dinâmico 	de recuperação de espaço
+	◆ Marcar registros eliminados (remoção lógica)
+	◆ Localizar os espaços desocupados quando necessário
+		● Sem buscas exaustivas!
+	➔ Ao adicionar um novo registro:
+	◆ Saber imediatamente se há slots
+		● Slot = espaço disponível de um registro removido
+	◆ Acessar diretamente um slot , se existir
+		● Diretamente = sem buscas exaustivas!
+
+Compactação
+
+➔ Procedimento de compactação: o espaço de todos os registros marcados é recuperado de uma só vez
+◆ Esporádico
+● Espaço não fica disponível imediatamente após remoção de cada registro
+
+➔ Maneira mais simples de compactar, se existe espaço suficiente no disco
+◆ Cópia sequencial:
+● Novo arquivo é gerado copiando o original
+● Substitui bytes dos registros eliminados
+➔ Alternativa: compactação in-place
+◆ Mais complexa e computacionalmente custosa
+
+Registros de Tamanho Fixo
+➔ RRN (relative record number)
+◆ Fornece a posição relativa de cada registro dentro do arquivo
+◆ Permite calcular o byte offset no qual cada registro começa
+
+Como identificar aonde estão os slots?
+
+Registros de Tamanho Fixo
+➔ Lista encadeada de registros eliminados disponíveis
+➔ Cada elemento da lista armazena o RRN do próximo
+registro vago
+➔ Cabeça da lista está no header do arquivo:
+◆ Cabeçalho (que é um registro) armazena RRN do 1º lot (registro vago)
+
+➔ Inserção e remoção ocorrem sempre no início da lista
+◆ Lista encadeada operada como PILHA !
+◆ Pilha pode ser mantida no próprio arquivo !
+
+➔ Exemplo:
+◆ Inserção do registro com RRN 3
+➔ inserção na pilha: registro eliminado do arquivo
+➔ remoção da pilha: registro adicionado ao arquivo
+
+Registros de Tamanho Variável
+
+➔ Registros de tamanho variável: um problema adicional…
+◆ Registros não são acessíveis por RRN…
+	● Não se recupera os byte offsets pelos RRNs
+➔ Solução:
+◆ Armazenar os byte offsets na lista encadeada
+	● ao invés dos RRNs
+◆ Utilizar registros com indicador de tamanho
+◆ Permite saber o tamanho do slot a partir do byte offset
+
+➔ Mas o problema ainda não está resolvido…
+◆ Registros são de tamanho variável => não é qualquer slot da lista que serve para acomodar um novo registro a   ser adicionado
+	● É preciso encontrar um slot grande o suficiente
+		○ Se não for encontrado, adiciona-se ao final do arquivo
+	● E para isso, é preciso percorrer sequencialmente a lista
+
+Fragmentação Interna
+
+➔ No Exemplo: usamos todos os 72 bytes de um slot para adicionar um registro de apenas 55 bytes
+◆ Os 17 bytes extras dentro do registro ficaram inutilizados
+➔ Tratamento de fragmentação interna
+◆ Os bytes não utilizados no registro é mantido como um slot menor na lista de registros eliminados
+
+Fragmentação Externa
+
+➔ Após a inserção de um registro de 8 bytes, restam:
+◆ 4 bytes para indicador de tamanho
+◆ 1 byte para dados
+➔ No entanto... qual a probabilidade de encontrar um ou mais registros que ocupem o espaço (slot) restante?
+
+➔ Estratégias para combater a fragmentação externa
+◆ Compactação (off-line)
+● Gerar novamente o arquivo de tempos em tempos
+◆ Coalescing
+	● Buscar por slots disponíveis que sejam fisicamente adjacentes e uni-los em slots disponíveis maiores
+	● Dificuldade? 
+
+➔ Estratégias para combater a fragmentação externa
+◆ Estratégias de Alocação de slots
+	● Tentar evitar a fragmentação antes que ela ocorra por meio de estratégias de alocação de slots para
+   	novos registros
+
+Estratégias de Alocação de Slots
+➔ First-Fit ◆ Primeiro da lista que seja grande o suficiente
+	➔ Estratégia mais simples de todas
+		◆ Requer apenas percorrer a lista
+	➔ Na verdade, não tenta prevenir fragmentação
+		◆ Responsabilidade da compactação e/ ou coalescing
+
+➔ Best-Fit◆ Aquele com tamanho mais parecido ao do registro
+	➔ Estratégia mais intuitiva de todas
+	➔ Requer manter a lista ordenada
+		◆ Ordenação ascendente com o tamanho dos slots
+		◆ Demanda tempo computacional extra: não é mais possível sempre adicionar um slot ao início da lista
+	➔ Mas, na verdade, pode piorar fragmentação
+		◆ Se slot não for perfeito, sobra é mínima!
+
+➔ Worst-Fit 
+	➔ Estratégia menos intuitiva de todas
+		◆ Requer manter a lista ordenada
+			● Ordenação descendente com o tamanho dos slots
+			● Tempo extra é compensado: se 1º slot não acomodar o registro, nenhum outro slot irá!
+		◆ Minimiza fragmentação
+			● Já que raramente slot é perfeito, sobra é máxima!
+		◆ Aquele com o maior tamanho de todos
+
+Compressão
+➔ Reduz arquivos!
+◆ Diminui armazenamento (e custo)
+◆ Transmissão mais rápida
+	● Diminui tempo de acesso
+	● Ou o mesmo tempo de acesso com largura de banda menor
+◆ Processamento mais rápido
+
+➔ Envolve codificar informação em um arquivo para que ela ocupe menos espaço
+➔ Existem várias técnicas
+◆ Algumas genéricas
+◆ Outras específicas para tipos de dado
+
+➔ Normalmente, usar ou não uma técnica de compressão é situacional
+◆ Compressão requer processamento extra
+◆ Aumento da complexidade do código
+◆ E muitas vezes perda de legibilidade
+➔ É preciso analisar cada caso, e cada algoritmo disponível
+◆ Somente usar caso o custo-benefício seja positivo
+

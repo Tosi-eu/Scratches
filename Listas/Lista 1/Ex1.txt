@@ -10,3 +10,117 @@
 |                   |        | - processaDados()|         | - calibrarTela()|         | - estabelecerConexao() |
 |                   |        |                  |         |                 |         |                        |
 +------------------+         +------------------+         +-----------------+         +------------------------+
+
+public class Celular {
+    private Processador processador;
+    private Tela tela;
+    private SistemaSom sistemaSom;
+    private SistemaComunicacao sistemaComunicacao;
+    
+    public Celular() {
+        this.processador = new Processador();
+        this.tela = new Tela();
+        this.sistemaSom = new SistemaSom();
+        this.sistemaComunicacao = new SistemaComunicacao();
+    }
+    
+    // Funcionalidades públicas da Tela
+    public void ligarTela() {
+        this.tela.ligar();
+    }
+    
+    public void desligarTela() {
+        this.tela.desligar();
+    }
+    
+    // Funcionalidades privadas da Tela
+    private void ajustarBrilho(int nivel) {
+        this.tela.setBrilho(nivel);
+    }
+    
+    private void ajustarContraste(int nivel) {
+        this.tela.setContraste(nivel);
+    }
+    
+    // Funcionalidades públicas do Sistema de Som
+    public void aumentarVolume() {
+        this.sistemaSom.aumentarVolume();
+    }
+    
+    public void diminuirVolume() {
+        this.sistemaSom.diminuirVolume();
+    }
+    
+    // Funcionalidades privadas do Sistema de Som
+    private void mudarCanal(int canal) {
+        this.sistemaSom.setCanal(canal);
+    }
+    
+    private void ajustarEqualizador(String tipo, int nivel) {
+        this.sistemaSom.ajustarEqualizador(tipo, nivel);
+    }
+    
+    // Funcionalidades públicas do Sistema de Comunicação
+    public void fazerLigacao(String numero) {
+        this.sistemaComunicacao.fazerLigacao(numero);
+    }
+    
+    public void enviarMensagem(String numero, String mensagem) {
+        this.sistemaComunicacao.enviarMensagem(numero, mensagem);
+    }
+    
+    // Funcionalidades privadas do Sistema de Comunicação
+    private void conectarRedeWifi(String nomeRede, String senha) {
+        this.sistemaComunicacao.conectarRedeWifi(nomeRede, senha);
+    }
+    
+    private void enviarArquivo(String arquivo, String destinatario) {
+        this.sistemaComunicacao.enviarArquivo(arquivo, destinatario);
+    }
+}
+
+public class Processador {
+    // Atributos necessários para representar o estado do Processador
+}
+
+public class Tela {
+    private boolean ligada;
+    private int brilho;
+    private int contraste;
+    
+    // Funcionalidades públicas da Tela
+    public void ligar() {
+        this.ligada = true;
+    }
+    
+    public void desligar() {
+        this.ligada = false;
+    }
+    
+    // Métodos para ajustar brilho e contraste, que são funcionalidades privadas
+    // da Tela e só podem ser acessadas através de métodos públicos da classe Celular
+    public void setBrilho(int nivel) {
+        this.brilho = nivel;
+    }
+    
+    public void setContraste(int nivel) {
+        this.contraste = nivel;
+    }
+}
+
+public class SistemaSom {
+    private int volume;
+    private int canal;
+    private int[] equalizador;
+    
+    // Funcionalidades públicas do Sistema de Som
+    public void aumentarVolume() {
+        this.volume++;
+    }
+    
+    public void diminuirVolume() {
+        this.volume--;
+    }
+    
+    public void setCanal(int canal) {
+        this.canal = canal

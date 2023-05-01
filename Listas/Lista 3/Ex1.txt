@@ -1,77 +1,101 @@
-abstract class Veiculo {
+// Classe abstrata Veiculo
+public abstract class Veiculo {
     public abstract void listarVerificacoes();
     public abstract void ajustar();
     public abstract void limpar();
 }
 
-class Bicicleta extends Veiculo {
+// Classe Bicicleta
+public class Bicicleta extends Veiculo {
+    @Override
     public void listarVerificacoes() {
         System.out.println("Verificar freios e pneus.");
     }
+    
+    @Override
     public void ajustar() {
-        System.out.println("Ajustar posição do selim e guidão.");
+        System.out.println("Ajustar altura do selim e guidão.");
     }
+    
+    @Override
     public void limpar() {
-        System.out.println("Limpar a bicicleta com água e sabão.");
+        System.out.println("Limpar quadro e rodas.");
     }
+    
     public void engraxarCorrente() {
-        System.out.println("Engraxando corrente da bicicleta.");
+        System.out.println("Engraxando corrente.");
     }
 }
 
-class Automovel extends Veiculo {
+// Classe Automovel
+public class Automovel extends Veiculo {
+    @Override
     public void listarVerificacoes() {
         System.out.println("Verificar óleo, freios e pneus.");
     }
+    
+    @Override
     public void ajustar() {
-        System.out.println("Ajustar posição do banco e dos espelhos retrovisores.");
+        System.out.println("Ajustar freios, pneus e suspensão.");
     }
+    
+    @Override
     public void limpar() {
-        System.out.println("Lavando carro com água e detergente.");
+        System.out.println("Lavando o carro.");
     }
+    
     public void trocarOleo() {
-        System.out.println("Trocando óleo do motor do automóvel.");
+        System.out.println("Trocando óleo do motor.");
     }
 }
 
-class Oficina {
-    private Veiculo[] veiculos;
-    private int index;
+// Classe Oficina
+import java.util.ArrayList;
+
+public class Oficina {
+    private ArrayList<Veiculo> veiculos;
+    private int indice;
     
     public Oficina() {
-        veiculos = new Veiculo[4];
-        veiculos[0] = new Bicicleta();
-        veiculos[1] = new Bicicleta();
-        veiculos[2] = new Automovel();
-        veiculos[3] = new Automovel();
-        index = -1;
+        this.veiculos = new ArrayList<>();
+        this.indice = 0;
+        
+        // Adicionando veículos para teste
+        veiculos.add(new Bicicleta());
+        veiculos.add(new Automovel());
+        veiculos.add(new Automovel());
+        veiculos.add(new Bicicleta());
     }
     
     public Veiculo proximo() {
-        if (index < veiculos.length - 1) {
-            index++;
-        } else {
-            index = 0;
-        }
-        return veiculos[index];
+        Veiculo v = veiculos.get(indice);
+        indice++;
+        return v;
     }
     
     public void manutencao(Veiculo v) {
         v.listarVerificacoes();
         v.ajustar();
         v.limpar();
+        
         if (v instanceof Automovel) {
-            ((Automovel) v).trocarOleo();
-        } else if (v instanceof Bicicleta) {
-            ((Bicicleta) v).engraxarCorrente();
+            Automovel a = (Automovel) v;
+            a.trocarOleo();
+        }
+        
+        if (v instanceof Bicicleta) {
+            Bicicleta b = (Bicicleta) v;
+            b.engraxarCorrente();
         }
     }
 }
 
+// Classe Teste
 public class Teste {
     public static void main(String[] args) {
         Oficina o = new Oficina();
         Veiculo v;
+        
         for (int i = 0; i < 4; i++) {
             v = o.proximo();
             o.manutencao(v);

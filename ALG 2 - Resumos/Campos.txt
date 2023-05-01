@@ -1,0 +1,114 @@
+Organização de Arquivos
+➔ Dados em arquivos são, em geral, organizados de maneira lógica em campos e registros
+➔ Campos e registros são conceitos lógicos
+◆ Associados ao arquivo lógico
+◆ Não correspondem necessariamente a uma organização física
+
+➔ Campo:
+◆ Menor unidade lógica de informação em arquivo
+● Noção lógica (ferramenta conceitual)
+● Não está associada a um conceito físico
+➔ Há várias maneiras de organizar um arquivo mantendo a identidade dos campos
+
+➔ Estruturas de Organização de Campos:
+◆ Comprimento fixo
+◆ Indicador de comprimento
+◆ Delimitadores
+◆ Uso de tags
+
+Campos de Tamanho Fixo
+
+➔ Cada campo ocupa no arquivo um tamanho fixo, préestabelecido
+◆ Exemplo
+	● Nome: string de 12 caracteres (12 bytes)
+	● Rua: string de 10 caracteres (10 bytes)
+	● Número: inteiro (4 bytes)
+	● Cidade: string de 20 caracteres (20 bytes)
+
+➔ Prós e Contras?
+◆ Organização simples para ler e escrever dados
+◆ O espaço alocado (e não usado) aumenta desnecessariamente o tamanho do arquivo
+	● Desperdício de memória secundária (fragmentação interna) 
+➔ Dado precisa ser truncado se ultrapassar o tamanho do campo
+➔ Solução inapropriada quando se tem uma grande variabilidade nos tamanhos reais dos campos
+➔ Razoável apenas se o comprimento dos campos é realmente fixo, ou apresenta pouca variação
+
+Campos com Indicador de Comprimento
+➔ O tamanho de cada campo é armazenado imediatamente antes da informação
+◆ Indicador de comprimento: usualmente um inteiro (4 bytes)
+◆ Em arquivos binários: um único byte para armazenamento do indicador de comprimento se o tamanho do campo é inferior a 256 bytes
+
+Campos Separados por Delimitadores
+➔ Caractere especial (delimitador) inserido ao final de cada campo
+◆ Delimitador não pode ser um caractere válido
+● Espaços em branco não serviriam…
+● Ex: para campo nome podemos utilizar “| ”, “#”, ... 
+
+Campos com Tags “Keyword = Value”
+➔ Expressão “keyword=value”
+◆ Colocada imediatamente antes do campo
+◆ Possui semântica que explica o significado do campo
+➔ Geralmente usada em conjunto com outro método para campos (ex. delimitador, indicador de tamanho)
+
+
+➔ Vantagens:
+◆ Possui semântica local
+	● Campo fornece informação sobre si próprio
+◆ Permite identificar localmente o conteúdo do arquivo
+◆ Permite campos não obrigatórios
+➔ Desvantagem:
+◆ As keywords podem ocupar uma porção significativa do arquivo
+
+Organização em Registros "Registros = vários campos"
+➔ Registro:
+◆ Um conjunto de campos agrupados
+➔ Arquivo organizado em registros
+◆ Nível de organização mais alto
+
+➔ Assim como os campos, um registro é uma ferramenta conceitual
+◆ Está associado ao arquivo lógico e não à organização física
+◆ Outro nível de organização imposto aos dados para preservar significado semântico
+
+➔ Estruturas de Organização de Registros:
+◆ Tamanho fixo
+	● Campos de tamanho fixo
+	● Campos de tamanho variável
+◆ Tamanho variável
+	● Número pré-determinado de campos
+	● Uso de delimitadores
+	● Indicador de tamanho
+	● Uso de índice
+
+Registros Variáveis e # Fixo de Campos
+➔ Ao invés de especificar que cada registro contém um número fixo de bytes, podemos especificar um número
+fixo de campos
+◆ O tamanho do registro é variável em bytes
+◆ ex.: campos separados por delimitadores
+◆ Análogos aos de fim de campo
+	● Porém outro caractere deve ser utilizado
+	● Delimitador de campos pode ser mantido
+➔ Vantagens:
+◆ Permite número variável de campos
+◆ início do arquivo não é mais a única referência
+
+Registros de Tamanho Variável e Indicador de Tamanho
+➔ Indicador de Tamanho:
+◆ Indicador que precede o registro
+	● Fornece o seu tamanho total
+	● Campos separados por delimitadores
+➔ No início de cada registro:
+◆ Sabe-se onde termina aquele registro
+◆ Possível acessar diretamente o registro seguinte
+◆ Estratégia bastante usada para arquivos com
+registros de tamanho variável 
+
+➔ Índice de Endereçamento:
+◆ Armazena o byte offset
+◆ Deslocamento relativo ao início do arquivo
+◆ Também usado para calcular o tamanho dos registros.
+◆ Campos separados por delimitadores
+➔ Desvantagens?
+◆ Arquivo de índice
+◆ Manutenção de consistência
+
+

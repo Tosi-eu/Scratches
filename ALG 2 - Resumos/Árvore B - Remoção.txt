@@ -1,0 +1,108 @@
+➔ Na inserção:
+	◆ Split garante a manutenção das propriedades da árvore-B
+➔ Porém
+	◆ Propriedades precisam ser mantidas também durante a remoção de chaves
+	◆ Remoção sempre nas folhas!
+	◆ Vários casos a serem analisados
+
+➔ Caso 1:
+	◆ Remoção de uma chave em uma página folha mantendo ocupação mínima da árvore
+		● Número mínimo de chaves na página
+➔ Solução:
+	◆ Chave é retirada e demais chaves da página são reorganizadas
+
+➔ Caso 2:
+	◆ Removendo uma chave de uma página não folha
+➔ Solução: sempre remover de páginas folha
+	◆ Trocar a chave com sua sucessora imediata (ou com a predecessora imediata) que está numa folha
+	◆ Remover a chave da folha
+
+➔ Caso 3:
+◆ Remoção causa underflow na página
+	● Número de chaves abaixo da ocupação mínima
+'	➔ Solução: redistribuição
+		◆ Procura-se uma página irmã (com mesmo nó pai e chave separadora em comum) que contenha mais
+		   chaves do que o mínimo
+			● Se existir, redistribui-se as chaves entre essaspáginas
+		◆ Redistribuição provoca uma alteração na chave separadora que está no nó pai
+
+◆ Redistribuição:
+	● Ideia inovadora…
+	● Efeito local na árvore
+		○ Não se propaga para nós superiores
+	● Necessário
+		○ Mover apenas 1 chave para a página com underflow para restabelecer as propriedades da árvore-B
+	● Estratégia usual
+		○ Redistribuir as chaves de maneira equilibrada entre as páginas:
+		○ “balanceamento” dos espaços disponíveis
+
+➔ Caso 4:
+	◆ Ocorre underflow e a redistribuição não pode ser aplicada
+		● Não há chaves suficientes para dividir entre duas páginas irmãs
+
+ Solução: concatenação
+	● Combina-se o conteúdo das duas páginas com a chave separadora da página pai para formar uma única página
+	● Pode ocorrer underflow da página pai
+		○ Propagação de underflow (caso 5)
+
+➔ Caso 5: Underflow da página pai
+◆ Propagação de Underflow
+◆ Solução: Redistribuição ou Concatenação
+
+➔ Caso 6: diminuição da altura da árvore
+◆ Ocorre quando o nó raiz tem uma única chave e aplicase a concatenação de seus nós filhos
+◆ Como ocorreu no exemplo anterior…
+◆ Requer atualização da identificação do nó raiz no cabeçalho do arquivo 
+
+Remoção - Resumo
+1. Se a chave não estiver numa folha, troque-a com suasucessora (ou antecessora)
+2. Remova a chave da folha
+3. Se a folha continuar com o número mínimo de chaves, FIM
+4. Senão (underflow na página)
+a. se uma das páginas irmãs diretas (esquerda ou direita) tiver mais que o mínimo de chaves, aplique redistribuição e FIM
+b. senão
+i. concatene a pág. com uma das irmãs e a chave
+separadora do nó pai
+ii. se nó pai for raiz e sua última chave foi rebaixada,
+elimine a raiz e FIM
+4. Senão (underflow)
+b. senão
+i. senão, se nó pai continuar com o mínimo de
+chaves, FIM
+ii. senão (underflow no pai), volte ao item 4.a para o
+nó pai
+
+Desempenho Árvores-B
+(Medido em números de acesso a disco)
+
+➔ Busca de chaves...
+➔ No pior caso, a altura é dada por:
+ d <= 1 + log⎡m/2⎤ [ (N+1)/ 2 ]
+➔ Logo...
+◆ Altura é O( log⎡m/2⎤ N )
+◆ Busca no pior caso
+	● O( log⎡m/2⎤ N )
+➔ Inserção de chaves...
+➔ Toda inserção realiza busca
+◆ O( log⎡m/2⎤ N )
+➔ Além disso pode realizar split
+◆ Cada split opera sobre um número fixo de páginas e é portanto constante
+	● O(1)
+➔ Inserção de chaves...
+➔ No pior caso, overflows se propagam até a raiz e são realizados splits em tempo constante
+◆ O( log⎡m/2⎤ N ) splits com O(1) acessos cada
+➔ Logo... inserção no pior caso
+◆ O( log⎡m/2⎤ N )
+
+➔ Remoção de chaves...
+➔ Toda remoção realiza busca
+◆ O( log⎡m/2⎤ N )
+➔ Além disso, pode realizar concatenação/ redistribuição
+➔ Cada concatenação/ redistribuição opera sobre um número fixo de páginas e é portanto constante
+◆ O(1)
+➔ No pior caso, underflows se propagam até a raiz e são realizadas concatenações/ redistribuições em tempo constante
+◆ O( log⎡m/2⎤ N ) operações com O(1) acessos cada
+➔ Logo, remoção no pior caso
+◆ O( log⎡m/2⎤ N )
+
+

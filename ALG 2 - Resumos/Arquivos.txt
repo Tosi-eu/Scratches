@@ -1,0 +1,93 @@
+➔ Mecanismo de organização de informação mantida em
+memória secundária
+	◆ Acessada via computador (programa, sistema de arquivos do SO)
+
+Por que utilizamos arquivos?
+	◆ Armazena grande quantidade de memória a um custo relativamente baixo
+	◆ Armazena memória de maneira não-volátil
+	◆ Permite a persistência dos dados
+
+➔ Desvantagens
+	◆ Alto tempo de acesso
+	◆ Discos e outros dispositivos de armazenamento secundário são lentos
+
+Dispositivos de Armazenamento
+
+➔ HDD
+	◆ Disco mecânico
+	◆ Rotacionar e posicionar uma agulha no local adequado
+
+➔ SSD
+	◆ Semicondutores, controlador acessa células NAND
+	◆ Memória NAND ou NVM (3D XPoint/Optane) [5]
+➔ RAM
+	◆ Circuitos integrados, Semicondutores
+
+as memórias RAM mais antigas (DDR2) superam os melhores SSDs atuais.
+➔ Para as memórias mais recentes (DDR4), a transferência chega a ser 10x mais rápido!
+➔ E também temos a questão da latência!
+
+Disco:
+	◆ Conjunto de `pratos´ empilhados:
+	◆ Dados são gravados nas superfícies desses pratos
+➔ Superfícies:
+	◆ São organizadas em trilhas
+➔ Trilhas:
+	◆ São organizadas em setores
+➔ Cilindro:
+	◆ Conjunto de trilhas na mesma posição 
+
+Capacidade do disco (nominal)
+➔ Capacidade do setor:
+	◆ nº bytes (Ex. 512 bytes)
+➔ Capacidade da trilha:
+	◆ nº de setores por trilha * capacidade do setor
+➔ Capacidade do cilindro:
+	◆ nº de trilhas por cilindro * capacidade da trilha
+➔ Capacidade do disco:
+	◆ nº de cilindros * capacidade do cilindro
+
+Tempo de Busca (Seek)
+➔ Parte mais expressiva do tempo de acesso
+	◆ Movimento mais lento da operação leitura/ escrita
+	◆ Conteúdo de todo um cilindro pode ser lido com 1
+único seek
+➔ Depende de quanto o braço precisa se movimentar
+➔ Tende a ser maior em ambientes multiusuário
+➔ Para cálculos, trabalha-se com um tempo médio: tempo de busca para 1/3 do número de cilindros
+➔ Deve ser reduzido ao mínimo
+
+Tempo de Transferência
+Tempo transferência = (nº de bytes transferidos / nº de bytes por trilha) * tempo de rotação
+➔ Ex: disco de 10.000 rpm com 170 setores por trilha:
+◆ Para ler 1 setor: 1/ 170 de rotação;
+◆ 10.000 rpm = 6ms por rotação (tempo de rotação);
+◆ Tempo de transf. para 1 setor = 0,035ms.
+
+Exercício
+➔ Você sabe o seguinte sobre seu HD
+◆ nº de bytes por setor: 512
+◆ nº de setores por trilha: 40
+◆ nº de trilhas por cilindro: 11
+◆ nº de cilindros: 1.331 
+
+Capacidade = nº de bytes por setor x nº de setores por trilha x nº de trilhas por cilindro x nº de cilindros
+
+Substituindo os valores fornecidos na fórmula, temos:
+
+Capacidade = 512 bytes/setor x 40 setores/trilha x 11 trilhas/cilindro x 1.331 cilindros
+Capacidade = 30.171.520 bytes ou aproximadamente 30,2 MB
+
+Agora, para determinar quantos cilindros são necessários para armazenar o arquivo de dados de 20.000 registros, precisamos calcular o tamanho total do arquivo. Multiplicando o número de registros pelo tamanho de cada registro, temos:
+
+Tamanho do arquivo = 20.000 registros x 256 bytes/registro
+Tamanho do arquivo = 5.120.000 bytes ou aproximadamente 5,1 MB
+
+Dividindo o tamanho do arquivo pela capacidade nominal do HD, podemos determinar quantos cilindros são necessários para armazenar o arquivo:
+
+Cilindros necessários = Tamanho do arquivo / Capacidade do HD
+Cilindros necessários = 5.120.000 bytes / 30.171.520 bytes
+Cilindros necessários = 0,169 ou aproximadamente 1 cilindro
+
+Portanto, apenas um cilindro seria necessário para armazenar esse arquivo de dados. No entanto, é importante notar que a capacidade nominal do HD é apenas uma medida teórica e que a capacidade real pode ser um pouco menor devido a fatores como formatação, gerenciamento de arquivos e espaço reservado para o sistema operacional.
+

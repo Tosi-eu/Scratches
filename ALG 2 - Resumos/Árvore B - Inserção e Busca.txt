@@ -1,0 +1,105 @@
+Inserção de Chaves
+➔ Inserção
+	◆ Sempre realizada nos nós folha
+➔ Situações a serem analisadas
+	◆ Árvore vazia (situação inicial)
+	◆ Overflow no nó raiz
+	◆ Inserção em nós folha
+		● Sem overflow
+		● Com overflow
+
+Inserção - Árvore Vazia
+➔ Criação e preenchimento do nó raiz
+	◆ Primeira chave (árvore vazia)
+		● Criação do nó raiz
+	◆ Demais chaves
+		● Inserção até a capacidade limite do nó
+	◆ Chaves ordenadas
+
+➔ Exemplo:
+	◆ Nó com capacidade para 7 chaves
+	◆ Ordem 8
+➔ Chaves: letras do alfabeto
+➔ Situação inicial: árvore vazia
+
+Inserção - Overflow nó Raiz
+➔ Passo 1 – particionamento do nó (split)
+	◆ Nó original
+		● Nó original + novo nó
+			○ Split “1-to-2” ou “two-way”
+	◆ Chaves (incluindo nova) são distribuídas uniformemente nos dois nós
+
+➔ Passo 1 – particionamento do nó (split)
+	◆ Nó original
+		● Nó original + novo nó
+			○ Split “1-to-2” ou “two-way”
+	◆ Chaves (incluindo nova) são distribuídas uniformemente nos dois nós
+
+➔ Passo 2 – criação de uma nova raiz
+	◆ A criação de um nível mais alto na árvore permite a escolha da chave separadora
+
+➔ Passo 3 – Promoção de chave (promotion)
+	◆ A primeira chave do novo nó após particionamento é promovida para o nó raiz
+
+Inserção - Nós Folha
+➔ Passo 1 – Pesquisa (Vamos ver em seguida como é)
+	◆ Árvore é percorrida até encontrar o nó folha no qual a nova chave será inserida
+		● Páginas são lidas para memória principal
+
+➔ Passo 2 – inserção em nó com espaço (sem overflow)
+	◆ Ordenação das chaves após a inserção
+	◆ Ex: inserção da chave H
+
+➔ Passo 2 – inserção em nó cheio (com overflow)
+	◆ Particionamento (split)
+		● Criação de um novo nó
+		● Nó original ⇒ nó original + novo nó
+		● Distribuição uniforme das chaves nos dois nós
+	◆ Promoção
+		● Escolha da primeira chave do novo nó como chave separadora no nó pai
+			○ Nó por onde a pesquisa passou antes
+		● Reordenação e ajuste do nó pai para apontar para o novo nó
+		● Propagação de overflow
+
+➔ Inserção de N
+	◆ Particionamento: Criação de Nova Página
+	◆ Promoção: Inserção de nova chave no nó pai
+
+Busca
+➔ Busca pela chave K
+	◆ Trazer a página raiz (2) para a memória
+	◆ Buscar chave na raiz
+	◆ Se não encontrada
+		● Buscar na subárvore apropriada
+
+➔ d ≤ 1 + log⌈m/2⌉(N/ 2) "profundidade"
+ 	◆ O(log ⌈m/2⌉(N))
+➔ Exemplo
+	◆ 1M chaves
+	◆ Árvore de ordem 512
+	◆ d ≤ 1 + log256(500.000)
+		● d ≤ 3.37
+➔ No máximo, 3 acessos a disco para qualquer chave
+
+➔ Algoritmos recursivos
+	◆ Dois estágios de processamento
+		● Em páginas inteiras
+		● Dentro das páginas
+➔ Estrutura de dados
+	◆ Determina cada página de disco
+	◆ Pode ser implementada de diferentes maneiras
+
+➔ Para indexação
+	◆ Cada chave está associada a uma referência para o registro de dados correspondente no arquivo de dados
+	(afinal, a árvore-B é um índice!)
+
+➔ Conjunto de registros de tamanho fixo
+	◆ Cada registro corresponde a uma página de disco
+
+Busca da Chave K
+➔ Ler cabeçalho do Arquivo para encontrar RRN da raiz
+
+
+
+
+

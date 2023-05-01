@@ -1,0 +1,129 @@
+➔ Generalização de uma ABB paginada
+◆ Não é binária
+◆ Conteúdo de uma página não é mantido como árvore
+➔ 1960s: competição entre fabricantes e pesquisadores
+◆ Descobrir um método eficiente para armazenamento e recuperação em sistemas com grandes arquivos de dados
+
+➔ Método genérico para armazenamento e recuperação de
+dados
+➔ Propósito principal:
+◆ Organizar e manter um índice para um arquivo de
+acesso aleatório altamente dinâmico
+
+➔ Voltada para índices extremamente volumosos
+◆ Com Pool de buffers pequeno
+● Apenas uma parcela do índice pode ser carregada
+em memória principal
+● Operações baseadas em disco
+➔ Balanceada
+➔ Paginada
+➔ Construção bottom-up (em disco)
+◆ Nós folhas --> nó raiz
+
+➔ Chaves “indevidas” não são alocadas na raiz
+◆ Chaves adequadas emergem para a raiz naturalmente
+➔ Elimina os problemas de chaves separadoras inadequadas e de chaves extremas
+➔ Não é necessário tratar o problema de desbalanceamento
+◆ Balanceamento ocorre naturalmente
+
+➔ Cada nó
+◆ Página de disco
+◆ Sequência ordenada de chaves
+◆ Conjunto de “ponteiros” para subárvores (descendentes)
+● Número de ponteiros = número de chaves + 1
+
+➔ Ordem
+	◆ Número máximo de ponteiros para descendentes que podem ser armazenados em um nó
+➔ Ex: árvore-B de ordem 8
+	◆ Máximo de 7 chaves e 8 ponteiros
+
+➔ Observações
+◆ Número máximo de ponteiros é igual ao número máximo de descendentes de um nó
+◆ Nós folhas não possuem filhos
+	● Seus ponteiros são nulos
+
+➔ Nó com registro de índice
+◆ Árvore-B utilizada como estrutura de indexação
+◆ mais comum… (utilizada nas discussões posteriores)
+
+Propriedades da Árvore B
+
+➔ Uma árvore-B é n-ária
+◆ Possui mais de 2 descendentes por nó (página)
+
+➔ Numa árvore-B de ordem m
+◆ Cada página tem:
+	● No máximo m descendentes e m-1 chaves
+	● No mínimo ⌈m/2⌉ descendentes (exceto raiz e folhas)
+		○ Taxa de ocupação
+	● A raiz tem, no mínimo, 2 descendentes
+		○ A menos que seja uma folha
+➔ Todas as folhas estão no mesmo nível
+➔ Uma página não folha com k descendentes contém k-1 chaves
+◆ ⌈m/2⌉ ≤ k ≤ m
+➔ Uma página folha contém:
+◆ No mínimo ⌈m/2⌉-1 chaves
+	● Taxa de ocupação
+◆ No máximo m-1 chaves
+
+Profundidade da Árvore B
+➔ Número de descendentes possíveis de um nível d da árvore
+➔ = (número de chaves até o nível d) + 1
+➔ Consequência:
+➔ seja d o nível dos nós folha: d é a altura da árvore
+➔ em uma árvore com N chaves, vimos que o número de descendentes no nível d é igual a N+1
+➔ Perguntas:
+	➔ se uma árvore de ordem m tem N chaves, qual a altura dela?
+	➔ Melhor caso : t odas as páginas da árvore est ão com ocupação máxima (m -1 chaves, m descendent es), port 	ant o ela t em a altura mínima necessária para acomodar N chaves
+
+◆ nro. descendentes nível 1 (raiz): m
+◆ nro. descendentes nível 2: m * m = m2
+◆ nro. descendentes nível 3: m * m2 =m3
+◆ nro. descendentes nível d: m * m(d-1) =md = N+1
+
+➔ d = nível dos nós folha = altura da árvore
+◆ Vimos que em uma árvore com N chaves, o número de descendentes no nível dos nós folha é igual a N+1
+➔ Portanto, N + 1 = md, e d = logm(N+1)
+➔ Essa é a altura da árvore no melhor caso (é a árvore com menor altura possível!)
+
+➔ Pior caso : todas as páginas da árvore est ão com ocupação mínima (⌈m/2⌉ -1 chaves, ⌈m/2⌉ descendent es), port anto ela tem a altura máxima necessária para acomodar N chaves
+
+◆ Esse é o cenário quando todas as páginas estão com ocupação mínima
+◆ Cada nó terá o mínimo de chaves e de descendentes
+◆ Árvore terá a maior altura possível para esse número de chaves!
+
+◆ Cada nó terá o mínimo de descendentes
+◆ Árvore terá sua maior altura e menor largura
+◆ Ocupação mínima por página: ⎡m/2⎤ descendentes
+(exceto raiz e folhas)
+
+➔ Para uma árvore de ordem m
+◆ Raiz (nível 1)
+	● 2 descendentes
+◆ Nível 2
+	● 2 nós, tendo cada um ⎡m/2⎤ descendentes
+	● 2 x ⎡m/2⎤ descendentes no segundo nível
+
+➔ Para uma árvore de ordem m
+	◆ Nível 3
+		● 2 x ⎡m/2⎤nós x ⎡m/2⎤descendentes para cada nó
+		● 2 x ⎡m/2⎤2 descendentes
+	◆ O nível d terá ?
+		● 2 x ⎡m/2⎤ d-1 descendentes
+
+➔ Número mínimo de descendentes para um nível d da árvore:
+	2 x ⎡m/2⎤ d-1
+➔ Propriedade
+	◆ Número de descendentes de um nível d da árvore com N chaves até d:
+		N+1
+➔ Considerando…
+◆ d = nível das folhas (= altura da árvore)
+◆ m = ordem da árvore
+◆ N = número de chaves até o nível das folhas (N é o total de chaves armazenadas)
+➔ Calcula-se a profundidade da árvore no pior caso : (N + 1) = 2 x ⎡m/2⎤d-1 ⇒ d = 1 + log ⎡m/2⎤((N+1)/ 2)
+
+logm(N+1) ≤ d ≤ 1 + log ⎡m/2⎤((N+1)/ 2)
+
+a altura da árvore varia entre esses 2 limiares ela define o número máximo de acessos a disco necessários
+para localizar qualquer chave!
+

@@ -1,52 +1,33 @@
-         +-----------+
-         |   Banco   |
-         +-----------+
-              / \
-             /   \
-            /     \
-           /       \
-+--------+    +--------+
-|Gerente1|    |Gerente2|
-+--------+    +--------+
-     |              |
-     |              |
-     |              |
-+-----------------------+
-|          Cliente       |
-+-----------------------+
-| - nome: String         |
-| - cpf: String          |
-| - endereco: String     |
-| - telefone: String     |
-| - email: String        |
-| - listaProdutos: List  |
-+-----------------------+
-| +acessarConta(): void  |
-| +solicitarProduto(): void|
-+-----------------------+
+                 +--------------+
+                 |   Gerente    |
+                 +--------------+
+                 | -nome: String|
+                 | -cpf: String |
+                 | -clientes:   |
+                 |   List<Cliente>|
+                 +--------------+
+                 | +aceitarPedido(produto: Produto, cliente: Cliente): void|
+                 | +adicionarCliente(cliente: Cliente): void               |
+                 | +getClientes(): List<Cliente>                           |
+                 +--------------+
+                        ^    ^
+                        |    |
+                        |    |
+          +-------------+    +--------------+
+          |                           |
++-------------+                 +--------------+
+|   Cliente   |                 |    Produto   |
++-------------+                 +--------------+
+| -nome: String|                |-tipo: String |
+| -cpf: String |                +--------------+
+| -contas:     |                       ^
+|   List<Conta>|                       |
+| -gerente:    |                       |
+|   Gerente    |               +--------------+
++-------------+                |    Conta     |
+                               +--------------+
+                               | -numero: int |
+                               | -saldo:  double  |
+                               | -cliente: Cliente|
+                               +--------------+
 
-+-----------------------+
-|        Produto        |
-+-----------------------+
-| - codigo: String       |
-| - tipo: Enum           |
-| - dataAbertura: Date   |
-| - cliente: Cliente     |
-| - conta: ContaBancaria |
-+-----------------------+
-| +abrirConta(): void    |
-| +solicitarCartao(): void|
-| +solicitarEmprestimo(): void|
-+-----------------------+
-
-+-----------------------+
-|     ContaBancaria      |
-+-----------------------+
-| - numero: String       |
-| - saldo: double        |
-| - cliente: Cliente     |
-+-----------------------+
-| +depositar(): void     |
-| +sacar(): void         |
-| +transferir(): void    |
-+-----------------------+
